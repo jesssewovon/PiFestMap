@@ -6,7 +6,7 @@
         <div class="page-content" style="margin-top: 0px;">
             <div class="" style="margin-bottom: 10px;position: absolute;top: 30px;z-index: 11;width: 100%;">
                 <div class="" style="width: 90%;margin: auto;border: 2px solid #090C49;border-radius: 10px;padding: 5px;background-color: #fff;">
-                    <i class="fas fa-search" style="font-size: 20px;color: #090C49;margin: auto 10px;" @click="searching"></i><input type="text" v-model="search" placeholder="Search business..." style="display: inline;height: 40px;font-size: 14px !important;color: #090C49;border: none;width: 80%;margin: auto 10px;">
+                    <i class="fas fa-search" style="font-size: 20px;color: #090C49;margin: auto 10px;" @click="searching"></i><input type="text" v-model="search" :placeholder="$t('message.search_business')" style="display: inline;height: 40px;font-size: 14px !important;color: #090C49;border: none;width: 80%;margin: auto 10px;">
                 </div>
             </div>
             <div style="height:600px; width:100%;">
@@ -114,7 +114,7 @@
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 controlPosition: 'topright', // Position of the control
                 iconWidth: 25,
-                iconHeight: 40,
+                iconHeight: 35,
                 clicked_marker: null,
                 business_profiles: [],
             };

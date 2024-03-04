@@ -5,7 +5,7 @@
             <div style="display: inline-block;width: 30%;">
                 <button @click="$router.push('/dashboard')" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
                     <i class="fa fa-dashboard" style="opacity: 1; color: #FAD09E;"></i>
-                    Dashboard
+                    {{$t('message.dashboard')}}
                 </button>
             </div>
             <div style="width: 48%;display: inline-block;">
@@ -14,7 +14,7 @@
                         <i class="fa fa-circle-thin fa-stack-2x" style="opacity: 1; color: #FAD09E;"></i>
                         <i class="fa fa-plus fa-stack-1x" style="opacity: 1; color: #FAD09E;"></i>
                     </span>
-                    Add my business
+                    {{$t('message.add_my_business')}}
                 </button>
             </div>
             <div style="width: 18%;display: inline-block;">

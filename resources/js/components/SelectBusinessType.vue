@@ -2,14 +2,14 @@
   <div>
     <div id="select-business-type" class="menu menu-box-modal rounded-m app-background-color" data-menu-effect="menu-over" style="display: block;width: 95%;">
         <div class="menu-title">
-            <h1 class="font-24 app-color">{{$t('message.choose_category')}}</h1>
+            <h1 class="font-24 app-color">{{$t('message.select_business_type')}}</h1>
             <a href="#" class="close-menu"><i class="fa fa-times app-color"></i></a>
         </div>
         <div class="me-4 ms-3 mt-1">
             <div class="list-group list-custom-small" v-if="business_types.length > 0">
-                <a :data-category-id="type.id" :data-category-libelle="$t('message.categories.'+type.code)" :data-category-src="'images/'+type.img" href="#" class="categorie close-menu" v-for="type in business_types" :key="type.id" v-on:click="select_type(type)">
-                  <img class="me-3 mt-1" :src="'images/'+type.img">
-                  <span class="app-color">{{$t('message.categories.'+type.code)}}</span>
+                <a :data-category-id="type.id" :data-category-libelle="$t('message.business_type.'+type.code)" :data-category-src="'images/'+type.img" href="#" class="categorie close-menu" v-for="type in business_types" :key="type.id" v-on:click="select_type(type)">
+                  <img class="me-3 mt-1" :src="'images/'+type.img" style="object-fit: cover;">
+                  <span class="app-color">{{$t('message.business_type.'+type.code)}}</span>
                   <i v-if="selected_category && selected_category.id == type.id" class="fa fa-check-circle color-piketplace"></i>
                 </a>
             </div>

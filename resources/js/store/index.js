@@ -423,7 +423,7 @@ export default createStore({
             let self = this
             state.error = ""
             if (isLoggedIn == undefined || !isLoggedIn) {//If not logged in, we logged him in in piketplace
-                //state.connecting = true
+                state.connecting = true
             }
             console.log('in signInPiNetwork')
             //const scopes = ["username", "payments", "wallet_address", "preferred_language", "roles"];
@@ -459,8 +459,10 @@ export default createStore({
                         i18n: i18n
                     }
                     self.dispatch('signInPiketplace', dd);//Piketplace login
-                }else
+                }else{
+                    state.connecting = false
                     console.log('in signInPiNetwork, isLoggedIn')
+                }
                 
             }).catch(function(error) {
                 //alert('in sign pi error')
@@ -502,7 +504,7 @@ export default createStore({
                 //console.log("signin", resp.data);
                 state.isLoading = false
                 state.isOpenLoading = false
-                //state.connecting = false
+                state.connecting = false
                 if (resp.data.status == 'success') {
                     let user = resp.data.user
                     let cart = resp.data.data_cart.cart

@@ -1,4 +1,15 @@
 {
+    "search_business": "Maghanap ng negosyo...",
+    "add_my_business": "Idagdag ang aking negosyo",
+    "dashboard": "Dashboard",
+    "select_business_type": "Pumili ng uri ng negosyo",
+    "business_type": {
+        "bakery": "Panaderya",
+        "restaurant": "Restawran",
+        "coffee": "kape"
+    },
+
+
     "yes": "Oo",
     "no": "Hindi",
     "search": "Hanapin...",

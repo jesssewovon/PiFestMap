@@ -153,6 +153,7 @@ class HomeController extends Controller
         $business_profile_photos[] = [
             'id' => uniqid(),
             'url' => $access_path,
+            'path' => $path.'/'.$name,
         ];
 
         $business_profile->business_profile_photos = $business_profile_photos;
@@ -160,6 +161,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => true,
+            'business_profile' => $business_profile,
             'user' => $this->getUpdatedUser($request->user()->id),
         ]);
     }
@@ -176,6 +178,9 @@ class HomeController extends Controller
             foreach ($business_profile_photos as $key => $value) {
                 if ($value['id'] == $id) {
                     //unlink
+                    if (file_exists($value['path'])) {
+                        unlink($value['path']);
+                    }
                 }else{
                     $tab[] = $value;
                 }
@@ -187,6 +192,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => true,
+            'business_profile' => $business_profile,
             'user' => $this->getUpdatedUser($request->user()->id),
         ]);
     }

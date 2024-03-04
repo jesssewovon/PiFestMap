@@ -1,4 +1,15 @@
 {
+    "search_business": "Buscar negocio...",
+    "add_my_business": "Agregar mi negocio",
+    "dashboard": "Panel",
+    "select_business_type": "Seleccione tipo de negocio",
+    "business_type": {
+        "bakery": "Panadería",
+        "restaurant": "Restaurante",
+        "coffee": "Café"
+    },
+
+
     "yes": "Sí",
     "no": "No",
     "search": "Investigar ...",

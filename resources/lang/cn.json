@@ -1,4 +1,15 @@
 {
+    "search_business": "搜索业务...",
+    "add_my_business": "添加我的业务",
+    "dashboard": "仪表板",
+    "select_business_type": "选择业务类型",
+    "business_type": {
+        "bakery": "面包店",
+        "restaurant": "餐厅",
+        "coffee": "咖啡"
+    },
+
+
     "yes": "是的",
     "no": "不",
     "search": "研究 ...",

@@ -1,4 +1,15 @@
 {
+    "search_business": "Search business...",
+    "add_my_business": "Add my business",
+    "dashboard": "Dashboard",
+    "select_business_type": "Select business type",
+    "business_type": {
+        "bakery": "Bakery",
+        "restaurant": "Restaurant",
+        "coffee": "Coffee"
+    },
+
+
     "yes": "Yes",
     "no": "No",
     "search": "Search ...",

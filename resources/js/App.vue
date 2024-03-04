@@ -2,7 +2,7 @@
 	<SelectBusinessType />
 	<SwitchLanguage />
 	<MessageBoxes />
-	
+	<Loading />
 	<vue3-confirm-dialog></vue3-confirm-dialog>
     <router-view/>
 </template>
@@ -13,10 +13,9 @@
 	import SelectBusinessType from './components/SelectBusinessType.vue'
 	import SwitchLanguage from './components/SwitchLanguage.vue'
 	import MessageBoxes from './components/MessageBoxes.vue'
+	import Loading from './components/Loading.vue'
 
     import { ref, onMounted } from 'vue'
-
-    //const adsenseContent = ref(null)
 
     onMounted(() => {
     })

@@ -1,8 +1,12 @@
 <template>
     <div>
         <Header v-if="prevRoute" :withAppName="true" :route="prevRoute.path" ref="header"/>
-        <div v-if="!isLoading" class="page-content app-background-color" style="margin-top: -20px;padding-top: 30px;">
-            <h3 style="text-align: center;margin-bottom: 20px;" class="app-color">Recent orders</h3>
+        <div v-if="!isLoading" class="page-content app-background-color" style="">
+            <div style="padding-top: 30px;padding-bottom: 20px;">
+                <h3 style="text-align: center;" class="app-color">
+                    Recent orders
+                </h3>
+            </div>
             <div style="width: 100%;height: 2px;border: 2px solid #090C49;" class="app-color font-600"></div>
             <div style="width: 95%; margin: auto;margin-top: 20px;">            
                 <div style="text-align: center;width: 100%;padding: 5px;margin: auto;vertical-align: top;display: inline-flex;">

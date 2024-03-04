@@ -7,12 +7,9 @@
             </div>
             <h3 class="mt-5" style="text-align: center;">Are you sure you want to delete the item ?</h3>
             <div class="content mb-0">
-                <h5 class="app-color">ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+                <h5 class="app-color" style="text-align: center;">
+                    Are you sure you want to delete this photo? this action is irreversible.
+                </h5>
                 <button @click="delete_photo"
                 class="font-900" style="margin-top: 20px;background-color: #DF6161!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
                     Delete photo
@@ -25,15 +22,21 @@
                     Business Photos
                 </h3>
             </div>
-            <div v-if="business_profile" style="width: 100%;" class="app-color font-600">
+            <div v-if="business_profile && business_profile.business_profile_photos && business_profile.business_profile_photos.length>0" style="width: 100%;" class="app-color font-600">
                 <div v-for="photo in business_profile.business_profile_photos" style="position: relative;width: 95%;margin: 22px auto;">
                     <span class="" style="position: absolute;right: 0;padding: 10px;">
-                        <span class="app-background-color" style="padding: 10px; border-radius: 5px;">
-                            <i @click="delete_photo_confirmation(photo)" class="fa fa-trash app-color font-16" style=""></i>
+                        <span @click="delete_photo_confirmation(photo)" class="app-background-color" style="padding: 10px; border-radius: 5px;">
+                            <i class="fa fa-trash app-color font-16" style=""></i>
                         </span>
                     </span>
                     <img :src="photo.url" style="width: 100%;height: 400px;object-fit: cover;border-radius: 2%;">
                 </div>
+            </div>
+            <div v-else style="width: 100%;text-align: center;">
+                <button @click="save"
+                    class="font-900 app-background-color" style="margin-top: 20px auto;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 50%;height: 50px;">
+                    No business profile photos
+                </button>
             </div>
         </div>
         <input v-show="false" type="file" id="file" @change="onFileChange" name="" accept="image/jpeg, image/gif, image/png">
@@ -174,8 +177,7 @@
                     this.saving = false;
                     if (res.data.status === true) {
                         this.file = null
-                        let msg = this.$t('message.saved')
-                        //this.$functions.msg_box(this, 'success', this.$t('message.cart.success'), msg)
+                        this.business_profile = res.data.business_profile
                         this.$show_modal.show_modal({id: 'success', title: "Success", message: "Saved successfully", btn_text: 'OK'})
                     } else {
                         this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
@@ -203,8 +205,7 @@
                     this.photo_to_delete = null
                     if (res.data.status === true) {
                         this.file = null
-                        let msg = this.$t('message.saved')
-                        //this.$functions.msg_box(this, 'success', this.$t('message.cart.success'), msg)
+                        this.business_profile = res.data.business_profile
                         this.$show_modal.show_modal({id: 'success', title: "Success", message: "Deleted successfully", btn_text: 'OK'})
                     } else {
                         this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})

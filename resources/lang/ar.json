@@ -1,4 +1,15 @@
 {
+    "search_business": "بحث عن الأعمال...",
+    "add_my_business": "أضف أعمالي",
+    "dashboard": "لوحة القيادة",
+    "select_business_type": "اختر نوع العمل",
+    "business_type": {
+        "bakery": "مخبز",
+        "restaurant": "مطعم",
+        "coffee": "قهوة"
+    },
+
+
     "yes": "نعم",
     "no": "لا",
     "search": "يبحث ...",

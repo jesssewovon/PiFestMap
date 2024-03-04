@@ -1,4 +1,15 @@
 {
+    "search_business": "Tìm kiếm doanh nghiệp...",
+    "add_my_business": "Thêm doanh nghiệp của tôi",
+    "dashboard": "bảng điều khiển",
+    "select_business_type": "Chọn loại hình kinh doanh",
+    "business_type": {
+        "bakery": "Cửa hàng bánh mì",
+        "restaurant": "Nhà hàng",
+        "coffee": "Cà phê"
+    },
+
+
     "yes": "Đúng",
     "no": "Không",
     "search": "Nghiên cứu ...",

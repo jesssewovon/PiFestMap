@@ -19,9 +19,9 @@
                     <label for="libelle" class="app-color">Business type</label>
                     <div data-menu="select-business-type" style="background-color: #fff;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <img v-if="business_profile.business_type==null" id="category_selected_img" src="/images/unknown.png" style="width: 20px;height: 20px;">
-                        <img v-else id="category_selected_img" :src="'/images/'+business_profile.business_type.img" style="width: 20px;height: 20px;">
-                        <label v-if="business_profile.business_type==null" id="category_selected_label" for="form5" class="color-piketplace" style="margin-left: 22px;">{{ $t('message.select_category') }}</label>
-                        <label v-else id="category_selected_label" for="form5" class="color-piketplace" style="margin-left: 22px;">{{$t('message.categories.'+business_profile.business_type.code)}}</label>
+                        <img v-else id="category_selected_img" :src="'/images/'+business_profile.business_type.img" style="width: 20px;">
+                        <label v-if="business_profile.business_type==null" id="category_selected_label" for="form5" class="color-piketplace" style="margin-left: 22px;">{{ $t('message.select_business_type') }}</label>
+                        <label v-else id="category_selected_label" for="form5" class="color-piketplace" style="margin-left: 22px;">{{$t('message.business_type.'+business_profile.business_type.code)}}</label>
                         <span><i class="fa fa-chevron-down" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                         <div id="required-categories_id" style="color: red;display: none;">{{ $t('message.required.categories_id') }}</div>

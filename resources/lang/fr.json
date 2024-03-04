@@ -1,4 +1,15 @@
 {
+    "search_business": "Rechercher une entreprise...",
+    "add_my_business": "Ajouter mon entreprise",
+    "dashboard": "Tableau de bord",
+    "select_business_type": "Sélectionnez le type d'entreprise",
+    "business_type": {
+        "bakery": "Boulangerie",
+        "restaurant": "Restaurant",
+        "coffee": "Café"
+    },
+
+
     "yes": "Oui",
     "no": "Non",
     "search": "Recherche ...",

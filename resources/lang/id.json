@@ -1,4 +1,15 @@
 {
+    "search_business": "Cari bisnis...",
+    "add_my_business": "Tambahkan bisnis saya",
+    "dashboard": "Dasbor",
+    "select_business_type": "Pilih jenis bisnis",
+    "business_type": {
+        "bakery": "Toko roti",
+        "restaurant": "Restoran",
+        "coffee": "Kopi"
+    },
+
+
     "yes": "Ya",
     "no": "TIDAK",
     "search": "Mencari ...",
