@@ -178,7 +178,7 @@ class HomeController extends Controller
             foreach ($business_profile_photos as $key => $value) {
                 if ($value['id'] == $id) {
                     //unlink
-                    if (file_exists($value['path'])) {
+                    if (isset($value['path']) && file_exists($value['path'])) {
                         unlink($value['path']);
                     }
                 }else{
