@@ -16,12 +16,12 @@
                         </div>
                         <label class="app-color font-300 font-16" style="margin: 10px auto">Orders</label>
                     </div>
-                    <div style="text-align: center;display: inline-block;margin: 10px;">
+                    <!-- <div style="text-align: center;display: inline-block;margin: 10px;">
                         <div @click="$router.push('/cart')" class="app-background-color app-border" style="width: 100px;height: 100px;margin: auto;border-radius: 10px;border-bottom-left-radius: 2px;text-align: center;">
                             <i class="fa fa-shopping-cart app-color" style="font-size: 26px;line-height: 90px;"></i>
                         </div>
                         <label class="app-color font-300 font-16" style="margin: 10px auto">My Cart</label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

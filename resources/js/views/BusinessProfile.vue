@@ -45,22 +45,22 @@
                         <div id="required-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                         <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                     </div>
-                    <div @click="$router.push('/menu')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
+                    <div @click="go_to('/menu')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Menu</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
-                    <div @click="$router.push('/loyalty-card')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
+                    <div @click="go_to('/loyalty-card')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Loyalty stamps</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
-                    <div @click="$router.push('business-profile-photos')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
+                    <div @click="go_to('business-profile-photos')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Business photos</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
-                    <div @click="$router.push('/business-profile-qr-code')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
+                    <div @click="go_to('/business-profile-qr-code')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Get QR code</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
@@ -183,7 +183,7 @@
           })
         },
         mounted() {
-            if (this.user.business_profile!==null) {
+            if (this.user.business_profile!==null && this.business_profile==null) {
                 this.business_profile = this.user.business_profile
             }
 
@@ -386,8 +386,36 @@
             onMapClick(e) {
                 console.log("You clicked the map at " + e.latlng);
             },
+            go_to(link){
+                if (this.business_profile===null || this.business_profile.id==undefined) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Save business profile to continue", btn_text: 'OK'})
+                    return
+                }
+                this.$router.push(link)
+            },
             save(){
+                if (this.business_profile && (this.business_profile.name==null || this.business_profile.name==undefined || this.business_profile.name=='')) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Set business profile name to continue", btn_text: 'OK'})
+                    return 
+                }
+                if (this.business_profile && (this.business_profile.business_types_id==null || this.business_profile.business_types_id==undefined)) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Select business profile type to continue", btn_text: 'OK'})
+                    return 
+                }
+                if (this.business_profile && (this.business_profile.latitude==null || this.business_profile.latitude==undefined || this.business_profile.latitude=='')) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Select business profile map point to continue", btn_text: 'OK'})
+                    return 
+                }
+                if (this.business_profile && (this.business_profile.longitude==null || this.business_profile.longitude==undefined || this.business_profile.longitude=='')) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Select business profile map point to continue", btn_text: 'OK'})
+                    return 
+                }
+                if (this.business_profile && (this.business_profile.location==null || this.business_profile.location==undefined || this.business_profile.location=='')) {
+                    this.$show_modal.show_modal({id: 'error', title: "Error", message: "Set business profile location to continue", btn_text: 'OK'})
+                    return 
+                }
                 this.saving = true;
+                console.log('this.business_profile', this.business_profile)
                 this.business_profile.pi_users_id = this.user.id;
                 axios.post('/api/v1/business-profiles', this.business_profile, {
                     headers: {

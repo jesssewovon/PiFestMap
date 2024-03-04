@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['pi_users_id', 'total', 'shipping', 'cancelled_at', 'auto_cancelled_at'];
+    protected $fillable = ['pi_users_id', 'total', 'paid', 'cancelled_at'];
 
     /**
      * The attributes that should be cast.
@@ -16,8 +16,6 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
-        'shipping' => 'array',
-        'noshipping' => 'boolean',
         'paid' => 'boolean',
     ];
 

@@ -423,7 +423,7 @@ export default createStore({
             let self = this
             state.error = ""
             if (isLoggedIn == undefined || !isLoggedIn) {//If not logged in, we logged him in in piketplace
-                state.connecting = true
+                //state.connecting = true
             }
             console.log('in signInPiNetwork')
             //const scopes = ["username", "payments", "wallet_address", "preferred_language", "roles"];
@@ -502,7 +502,7 @@ export default createStore({
                 //console.log("signin", resp.data);
                 state.isLoading = false
                 state.isOpenLoading = false
-                state.connecting = false
+                //state.connecting = false
                 if (resp.data.status == 'success') {
                     let user = resp.data.user
                     let cart = resp.data.data_cart.cart
@@ -802,7 +802,7 @@ export default createStore({
         },
         setPaymentVerifier({ commit, state }, data){
             commit('CLEAR_PAYMENT_VERIFIER')
-            //console.log('in setPaymentVerifier', data)
+            console.log('in setPaymentVerifier', data)
             state.uniqueId = data.uniqueId;
             self = data.self;
             const verifier = () => {
@@ -823,37 +823,10 @@ export default createStore({
                         //this.order = res.data.order;
                         //console.log("verifier", res.data.payment);
                         if (res.data.payment != null) {
-                            let msg = ""
-                            let redirectRoute = ''
-                            if (state.payment_from == "donation") {
-                                msg = i18n.global.t('message.donate.donation_thanks')
-                            }
-                            if (state.payment_from == "cart") {
-                                msg = i18n.global.t('message.cart.payment_done')
-                                redirectRoute = '/my-orders'
-                            }
                             state.paid = true
-                            functions.msg_box(self, 'success', i18n.global.t('message.info'), msg, redirectRoute)
                             commit('SET_UNIQUE_ID', '')
                             clearInterval(state.verifierPayment);//Break the setInterval
                         }
-                        if (res.data.cart != null) {
-                            state.cart.forEach(val=>{
-                                let cart_line = res.data.cart.find((el) => el.product.id == val.product.id);
-                                val.product = cart_line.product
-                                if (val.product.quantity<val.quantity) {
-                                    state.at_least_one_product_qty_insufficient=true
-                                }
-                            })
-                            console.log('cart verifierPayment', state.cart)
-                            //commit('SET_CART', res.data.cart)
-                            commit('SET_CART', state.cart)
-                        }
-                        if (res.data.productBuyNow != null) {
-                            console.log('productBuyNow', res.data.productBuyNow)
-                            state.productBuyNow = res.data.productBuyNow
-                        }
-                        console.log('hererrre')
                     })
                     .catch(error => {
                         //console.log(error);

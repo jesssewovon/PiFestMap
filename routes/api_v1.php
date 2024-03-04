@@ -32,6 +32,12 @@ Route::group(['middleware' => ['settings']], function() {
 		Route::post('/add-to-cart', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@add_to_cart');
 		Route::post('/delete-from-cart', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@delete_from_cart');
 		Route::get('/get-cart', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@getCart');
+		Route::post('/making-order', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@making_order');
+		///////////////////START PI PAYMENT BACKEND
+		Route::post('/approve', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@approve')->name('approve');
+		Route::post('/complete', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@complete')->name('complete');
+		Route::post('/incomplete', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@incomplete')->name('incomplete');
+		Route::post('/cancel', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@cancel')->name('cancel');
 		///////////////////END PI PAYMENT BACKEND
 	});
 	///////////////NO MIDDLEWARE

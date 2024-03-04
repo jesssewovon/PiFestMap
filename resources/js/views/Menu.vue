@@ -250,6 +250,15 @@
                     this.item.price = oldVal
                 }
             },
+            'business_profile.menu_status': function (newVal, oldVal){
+                this.save_business_profile()
+            },
+            'business_profile.orders_status': function (newVal, oldVal){
+                this.save_business_profile()
+            },
+            'business_profile.payments_status': function (newVal, oldVal){
+                this.save_business_profile()
+            },
         },
         methods: {
             open_add_item(){
@@ -353,7 +362,31 @@
                     }
                     
                 })
-            }
+            },
+            save_business_profile(){
+                this.saving = true;
+                axios.put(`/api/v1/business-profiles/${this.business_profile.id}`, this.business_profile)
+                .then(res => {
+                    console.log(res.data)
+                    this.saving = false;
+                    if (res.data.status === true) {
+                        let msg = this.$t('message.saved')
+                        this.business_profile = res.data.business_profile
+                        //this.$functions.msg_box(this, 'success', this.$t('message.cart.success'), msg)
+                        this.$show_modal.show_modal({id: 'success', title: "Success", message: "Saved successfully", btn_text: 'OK'})
+                    } else {
+                        //this.$functions.msg_box(this, 'error', '', this.$t('message.an_error_occured'))
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.saving = false
+                    if (error.response.status !== 401) {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
+                    }
+                })
+            },
         }
     }
 </script>

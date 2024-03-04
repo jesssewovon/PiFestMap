@@ -45,10 +45,10 @@
                                 <img src="/site_images/pi_v.png" style="height: 18px;">
                             </div>
                         </div>
-                        <button v-if="shopping.business_profile.orders_status===true && shopping.business_profile.payments_status===false" @click="save_item" class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
+                        <button @click="make_order" v-if="shopping.business_profile.orders_status===true && shopping.business_profile.payments_status===false" class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
                             Order
                         </button>
-                        <button v-if="shopping.business_profile.payments_status===true" @click="save_item" class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
+                        <button @click="make_payment" v-if="shopping.business_profile.payments_status===true" class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
                             Pay by Pi
                         </button>
                     </div>
@@ -95,53 +95,68 @@
               total: 0.00,
             }
         },
-      computed: {
-        ...mapState(['isLoggedIn', 'maintenance_mode', 'connecting', 'disconnecting', 'countries_db', 'agreements', 'isPiBrowser']),
-        isLoading:{
-            get(){
-                return this.$store.state.isLoading
+        computed: {
+            ...mapState(['isLoggedIn', 'maintenance_mode', 'connecting', 'disconnecting', 'countries_db', 'agreements', 'isPiBrowser']),
+            isLoading:{
+                get(){
+                    return this.$store.state.isLoading
+                },
+                set(val){
+                    this.$store.state.isLoading = val
+                }
             },
-            set(val){
-                this.$store.state.isLoading = val
-            }
-        },
-        user:{
-            get(){
-                return this.$store.state.user
+            user:{
+                get(){
+                    return this.$store.state.user
+                },
+                set(val){
+                    this.$store.state.user = val
+                }
             },
-            set(val){
-                this.$store.state.user = val
-            }
-        },
-        saving:{
-            get(){
-                return this.$store.state.saving
+            saving:{
+                get(){
+                    return this.$store.state.saving
+                },
+                set(val){
+                    this.$store.state.saving = val
+                }
             },
-            set(val){
-                this.$store.state.saving = val
-            }
-        },
-        business_profile:{
-            get(){
-                return this.$store.state.business_profile
+            business_profile:{
+                get(){
+                    return this.$store.state.business_profile
+                },
+                set(val){
+                    this.$store.state.business_profile = val
+                }
             },
-            set(val){
-                this.$store.state.business_profile = val
-            }
-        },
-        shopping:{
-            get(){
-                return this.$store.state.shopping
+            shopping:{
+                get(){
+                    return this.$store.state.shopping
+                },
+                set(val){
+                    this.$store.state.shopping = val
+                }
             },
-            set(val){
-                this.$store.state.shopping = val
-            }
+            uniqueId:{
+                get(){
+                    return this.$store.state.uniqueId
+                },
+                set(val){
+                    this.$store.state.uniqueId = val
+                }
+            },
         },
-      },
-      beforeRouteEnter(to, from, next) {
+        beforeRouteEnter(to, from, next) {
           next(vm => {
             vm.prevRoute = from
           })
+        },
+        created () {
+            this.verifyIfPaymentDone();
+        },
+        beforeUnmount () {
+            this.$store.dispatch('setUniqueId', '');
+            this.$store.dispatch('clearPaymentVerifier');
         },
         mounted() {
             //this.getCart()
@@ -187,6 +202,47 @@
                     this.cart[index].qty = 1
                 }
                 this.cart[index].qty = this.cart[index].qty + 1
+            },
+            make_order(){
+                this.saving = true;
+                axios.post('/api/v1/making-order', this.shopping)
+                .then(res => {
+                    console.log('making-order', res.data)
+                    this.saving = false;
+                    if (res.data.status === true) {
+                        this.$show_modal.show_modal({id: 'info', title: "Info", message: "Ordered successfully", btn_text: 'OK'})
+                    } else {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
+                    }
+                })
+                .catch(error => {
+                    this.saving = false
+                    console.log(error)
+                    console.log(error.response.status)
+                    if (error.response.status !== 401) {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
+                    }
+                })
+            },
+            make_payment(){
+                this.uniqueId = uuidv4();
+                let data = {
+                    uniqueId: this.uniqueId,
+                    memo: this.shopping.business_profile.name,
+                    amount: this.total,
+                    userId: this.user.id,
+                    cart: this.shopping.shopping_cart,
+                };
+                
+                this.$store.dispatch('payment', data);
+            },
+            verifyIfPaymentDone () {
+                let uniqueId = this.uniqueId;
+                let data = {
+                    uniqueId:this.uniqueId,
+                    self:this,
+                }
+                this.$store.dispatch('setPaymentVerifier', data)
             },
         }
     }

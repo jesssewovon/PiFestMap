@@ -5,25 +5,16 @@ namespace App\Http\Controllers\Api\v1\FrontEnd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Item;
 use App\Models\Payment;
-use App\Models\FailedPayment;
-use App\Models\Country;
 use App\Models\BusinessType;
-use App\Models\Product;
 use App\Models\PiUser;
 use App\Models\Order;
 use App\Models\LineOrder;
-use App\Models\ShippingApply;
-use App\Models\Notification;
 use App\Models\Setting;
-use App\Models\Message;
-use App\Models\City;
 use App\Models\Language;
-use App\Models\Agreement;
-use App\Models\Validation;
 use App\Models\Wallet;
-use App\Mail\Purchase;
-use App\Mail\EmailVerification;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -262,5 +253,47 @@ class HomeController extends Controller
             'cart' => $data['cart'],
             'user' => $user,
         ]);
+    }
+
+    public function making_order(Request $request)
+    {
+        $user = $this->getUpdatedUser($request->user()->id);
+        DB::beginTransaction();
+        $now = now();
+        try {
+            $cart = $request->shopping_cart;
+            $data_order = [
+                'pi_users_id' => $user->id,
+                'ordered_at' => $now,
+            ];
+            $order = Order::create($data_order);
+            $total = 0;
+            foreach ($cart as $key => $line) {
+                $item = Item::where('id', $line['id'])->first();
+                $data_line_order = [
+                    'items_id' => $item->id,
+                    'orders_id' => $order->id,
+                    'name' => $item->name,
+                    'price' => $item->price,
+                    'quantity' => $line['qty'],
+                    'ordered_at' => $now,
+                ];
+                $total = piket_multiply($item->price, $line['qty']);
+                $line_order = LineOrder::create($data_line_order);
+            }
+            $order->update(['total' => $total]);
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'user' => $this->getUpdatedUser($request->user()->id),
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'user' => $this->getUpdatedUser($request->user()->id),
+            ]);
+        }
     }
 }

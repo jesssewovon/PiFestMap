@@ -7,6 +7,11 @@ use App\Models\BusinessProfile;
 use App\Models\LoyaltyCard;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 use App\Traits\Helper;
 
 class BusinessProfileController extends Controller
@@ -34,6 +39,26 @@ class BusinessProfileController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'location' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'business_types_id' => 'required',
+        ],[
+            'name.required' => 'name_required',
+            'location.required' => 'location_required',
+            'latitude.required' => 'latitude_required',
+            'longitude.required' => 'longitude_required',
+            'longitude.required' => 'longitude_required',
+            'business_types_id.required' => 'business_types_id_required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),
+            ]);
+        }
         $data = $request->all();
         $businessProfile = BusinessProfile::updateOrCreate(
             ['id' => isset($data['id'])?$data['id']:null], $data);
@@ -79,10 +104,32 @@ class BusinessProfileController extends Controller
      */
     public function update(Request $request, BusinessProfile $businessProfile)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'location' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'business_types_id' => 'required',
+        ],[
+            'name.required' => 'name_required',
+            'location.required' => 'location_required',
+            'latitude.required' => 'latitude_required',
+            'longitude.required' => 'longitude_required',
+            'longitude.required' => 'longitude_required',
+            'business_types_id.required' => 'business_types_id_required',
+        ]);
+         if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),
+            ]);
+        }
+        $data = $request->all();
+        $businessProfile->update($data);
         
         return response()->json([
             'status' => true,
-            'businessProfile' => $businessProfile,
+            'business_profile' => $businessProfile,
         ]);
     }
 

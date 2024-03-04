@@ -225,7 +225,9 @@
                         this.business_profile = res.data.business_profile
                         this.items = this.business_profile.items
                         this.shopping.business_profile = this.business_profile
-                        this.shopping.shopping_cart = []
+                        if (this.shopping.business_profile==null || this.shopping.business_profile.id==undefined || this.shopping.business_profile.id!=this.business_profile.id) {
+                            this.shopping.shopping_cart = []
+                        }
                     } else {
                         this.$show_modal.show_modal({id: 'error', title: "Error", message: "Une erreur s'est produite", btn_text: 'OK'})
                     }
