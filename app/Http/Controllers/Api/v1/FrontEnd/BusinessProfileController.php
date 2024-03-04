@@ -130,6 +130,7 @@ class BusinessProfileController extends Controller
         return response()->json([
             'status' => true,
             'business_profile' => $businessProfile,
+            'user' => $this->getUpdatedUser($request->user()->id),
         ]);
     }
 

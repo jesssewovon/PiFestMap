@@ -183,7 +183,7 @@
           })
         },
         mounted() {
-            if (this.user.business_profile!==null && this.business_profile==null) {
+            if (this.user.business_profile!==null) {
                 this.business_profile = this.user.business_profile
             }
 
