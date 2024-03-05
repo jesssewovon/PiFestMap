@@ -5,7 +5,7 @@
             <div class="menu-title">
                 <a href="#" class="close-menu" @click="$hide_modal.all" style="margin-top: 0;"><i class="fa fa-times app-color"></i></a>
             </div>
-            <h3 class="mt-5" style="text-align: center;">Are you sure you want to delete the item ?</h3>
+            <h3 class="mt-5" style="text-align: center;">Are you sure ?</h3>
             <div class="content mb-0">
                 <h5 class="app-color" style="text-align: center;">
                     Are you sure you want to delete this photo? this action is irreversible.

@@ -110,6 +110,7 @@ class HomeController extends Controller
         //$business_profiles = $this->getBusinessProfiles();
         $business_profiles = BusinessProfile::whereNull('deleted_at')
             //->whereHas('loyalty_card')
+            ->whereHas('user')
             ->with('business_type')->get();
         $data['business_profiles'] = $business_profiles;
 

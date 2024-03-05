@@ -21,7 +21,7 @@
                   <!-- <l-control-layers /> -->
                   <l-marker :lat-lng="clicked_marker" v-if="clicked_marker">
                       <!-- <l-popup>Clicked Location</l-popup> -->
-                      <l-icon :icon-url="iconUrl" :icon-size="[40, 60]" />
+                      <l-icon :icon-url="iconUrl" :icon-size="[20, 30]" />
                   </l-marker>
                   <!-- <l-circle-marker :lat-lng="userLocation" :fillOpacity="1" :radius="0.1" >
                     <l-popup>Current Location</l-popup>
@@ -31,7 +31,7 @@
                       <l-icon :icon-url="iconUrlCurrentPos" :icon-size="[25, 25]" />
                   </l-marker>
                   <l-marker :lat-lng="[47.41322, -1.219482]">
-                    <l-icon :icon-url="iconUrl" :icon-size="iconSize" />
+                    <l-icon :icon-url="iconUrl" :icon-size="[20, 30]" />
                   </l-marker>
                   <span v-for="bp in business_profiles">
                       <l-marker :lat-lng="[bp.latitude, bp.longitude]" @click="show_business_profile(bp)">

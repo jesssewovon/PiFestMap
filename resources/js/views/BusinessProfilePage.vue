@@ -6,11 +6,11 @@
             <div class="card app-background-color" style="box-shadow: none;margin: 22px;">
                 <label style="" class="app-color font-600 font-18">{{business_profile.name}}</label>
                 <div style="padding-top: 11px;">
-                    <img style="height: 20px;" :src="'/images/'+business_profile.business_type.img">&nbsp;&nbsp;
+                    <img style="width: 20px;" :src="'/images/'+business_profile.business_type.img">&nbsp;&nbsp;
                     <label style="" class="app-color font-400 font-16">{{business_profile.business_type.libelle}}</label>
                 </div>
                 <div style="padding-top: 11px;">
-                    <img style="height: 40px;" src="/site_images/marker.png">
+                    <img style="width: 20px;" src="/site_images/marker.png">&nbsp;&nbsp;
                     <label style="" class="app-color font-100 font-16">{{business_profile.location}}</label>
                 </div>
                 <div v-if="business_profile" style="width: 100%;" class="app-color font-600">

@@ -28,6 +28,11 @@ class BusinessProfile extends Model
         return $this->belongsTo(BusinessType::class, 'business_types_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(PiUser::class, 'pi_users_id', 'id');
+    }
+
     public function loyalty_card()
     {
         return $this->hasOne(LoyaltyCard::class, 'business_profiles_id', 'id');
