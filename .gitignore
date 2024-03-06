@@ -19,6 +19,7 @@ yarn-error.log
 /save
 /resources/views/app.blade.php
 /resources/views/privacy-policy.blade.php
+/resources/lang
 ads.txt
 .htaccess
 validation-key.txt
