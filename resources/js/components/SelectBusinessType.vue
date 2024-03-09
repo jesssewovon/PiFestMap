@@ -10,7 +10,7 @@
                 <a :data-category-id="type.id" :data-category-libelle="$t('message.business_type.'+type.code)" :data-category-src="'images/'+type.img" href="#" class="categorie close-menu" v-for="type in business_types" :key="type.id" v-on:click="select_type(type)">
                   <img class="me-3 mt-1" :src="'images/'+type.img" style="object-fit: cover;">
                   <span class="app-color">{{$t('message.business_type.'+type.code)}}</span>
-                  <i v-if="selected_category && selected_category.id == type.id" class="fa fa-check-circle color-piketplace"></i>
+                  <i v-if="business_profile && business_profile.business_types_id == type.id" class="fa fa-check-circle color-piketplace"></i>
                 </a>
             </div>
             <div class="clear"></div>

@@ -88,7 +88,8 @@ export default createStore({
 
 
         userLocation: null,
-        center: [6.171446325386116, 1.2958717346191408],
+        //center: [6.171446325386116, 1.2958717346191408],//Lomé
+        center: [44.402391829094, -122.607421875],//Pi core team
         business_types: [],
         business_profile: {
             name: "",
@@ -132,6 +133,12 @@ export default createStore({
         },
     },
     mutations:{
+        deleteAttribute(state, attributeName) {
+            // Use JavaScript's delete operator to remove the attribute
+            //if (state[attributeName]!=undefined && state[attributeName]!=null) {
+                delete state[attributeName];
+            //}
+        },
         SET_PRODUCT(state, products){
             state.products.push(...products);
         },
@@ -582,7 +589,7 @@ export default createStore({
               let userLocation = [position.coords.latitude, position.coords.longitude];
               commit('SET_USER_LOCATION', userLocation)
               //commit('SET_CENTER_LOCATION', userLocation)
-              state.center = userLocation
+              //state.center = userLocation
               console.log('this.userLocation', position, userLocation)
             }, error => {
               console.error("Error getting user location:", error);

@@ -30,9 +30,9 @@
                       <!-- <l-popup>Current Location</l-popup> -->
                       <l-icon :icon-url="iconUrlCurrentPos" :icon-size="[25, 25]" />
                   </l-marker>
-                  <l-marker :lat-lng="[47.41322, -1.219482]">
+                  <!-- <l-marker :lat-lng="[47.41322, -1.219482]">
                     <l-icon :icon-url="iconUrl" :icon-size="[20, 30]" />
-                  </l-marker>
+                  </l-marker> -->
                   <span v-for="bp in business_profiles">
                       <l-marker :lat-lng="[bp.latitude, bp.longitude]" @click="show_business_profile(bp)">
                         <l-icon :icon-url="bp.business_type.map_img" :icon-size="iconSize" />
@@ -108,7 +108,8 @@
                 show_categories: true,
                 data_link: null,
 
-                zoom: 13,
+                //zoom: 13,
+                zoom: 2,
                 //center: [51.505, -0.09],
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -198,7 +199,10 @@
                 this.$store.dispatch('disable_welcome')
             }*/
             //alert(this.test)
-            console.log('center', this.center)
+            this.$store.commit('deleteAttribute', "center");
+            this.center = [44.402391829094, -122.607421875]
+            //console.log('center', this.center)
+            //alert(this.center[0])
             this.$store.dispatch('setConfDialog', this.$confirm)
             this.deleting = false
             this.saving = false
