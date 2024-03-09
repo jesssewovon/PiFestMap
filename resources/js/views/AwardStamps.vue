@@ -9,7 +9,7 @@
             <div class="card card-style app-background-color" style="box-shadow: none;margin-top: 10px;">
                 <div v-if="awarded_success===false" style="width: 95%;text-align: center;vertical-align: bottom;margin: auto;">
                     <div style="text-align: center;">
-                        <label class="app-color" style="margin-top: 40px;width: 50%;">Pioneer2 needs 5 more stamps to get next free coffee</label>
+                        <label class="app-color" style="margin-top: 40px;width: 50%;"><strong>{{username}}</strong> needs {{business_profile.loyalty_card.nb_stamps-nb_stamps_user}} more stamps to get next free coffee</label>
                     </div>
                     <div style="text-align: center;">
                         <label class="app-color" style="margin-top: 40px;width: 50%;">How many stamps do you want to award ?</label>
@@ -46,7 +46,7 @@
                 <div v-else style="width: 95%;text-align: center;vertical-align: bottom;margin: auto;">
                     <div style="text-align: center;">
                         <h2 class="font-900" style="text-align: center;">Success</h2>
-                        <label class="app-color" style="margin-top: 40px;width: 50%;">@Pioneer2 received {{nb_stamps}} stamps from you</label>
+                        <label class="app-color" style="margin-top: 40px;width: 50%;"><strong>{{username}}</strong> received {{nb_stamps}} stamps from you</label>
                     </div>
                     <button @click="$router.back"
                     class="font-900" style="margin-top: 20px;background-color: transparent!important;color: #090C49;border: 1px solid #090C49!important;border-radius: 10px;width: 100%;height: 50px;">
@@ -88,6 +88,8 @@
           prevRoute: null,
           nb_stamps: 1,
           user_id: null,
+          username: "",
+          nb_stamps_user: 0,//Nb stamps that user has
           awarded_success: false,
         }
       },
@@ -133,6 +135,8 @@
         },
         mounted() {
             this.user_id = this.$route.params.user_id
+            this.username = "@"+this.$route.params.username
+            this.nb_stamps_user = "@"+this.$route.params.nb_stamps
             ///////////////////////////////////////////////////////////
             let self = this
             $( document ).ready(function() {
@@ -149,14 +153,6 @@
             },
         },
         methods: {
-            onDecode (decodedString) {
-                let data = JSON.parse(decodedString)
-                if (data.app_id == "pi_fest_map_2024") {
-
-                }
-                alert(decodedString)
-                console.log("decodedString", decodedString)
-            },
             decrease(){
                 if (this.nb_stamps == undefined || this.nb_stamps == null || this.nb_stamps <= 1) {
                     this.nb_stamps = 1

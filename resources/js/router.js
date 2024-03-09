@@ -66,7 +66,7 @@ const routes = [
     },
     {
         name: "award-stamps",
-        path: "/award-stamps/:user_id",
+        path: "/award-stamps/:user_id/:username/:nb_stamps",
         component: AwardStamps
     },
     {

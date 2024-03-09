@@ -85,4 +85,9 @@ class PiUser extends Authenticatable
     {
         return $this->hasOne(BusinessProfile::class, 'pi_users_id', 'id');
     }
+
+    public function user_stamp()
+    {
+        return $this->hasOne(UserStamp::class, 'id', 'pi_users_id');
+    }
 }

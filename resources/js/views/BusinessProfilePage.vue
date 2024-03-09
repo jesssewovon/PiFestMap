@@ -209,9 +209,15 @@
         mounted() {
             this.getBusinessProfile(this.$route.params.id)
             this.$store.dispatch('scrollToTop')
+            let nb_stamps = 0
+            if (this.user.user_stamp) {
+                nb_stamps = this.user.user_stamp.nb_stamps
+            }
             let data = {
                 app_id: "pi_fest_map_2024",
-                user_id: this.user.id
+                user_id: this.user.id,
+                username: this.user.username,
+                nb_stamps: nb_stamps
             }
             this.qrCodeData = JSON.stringify(data)
         },

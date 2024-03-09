@@ -103,9 +103,9 @@
             onDecode (decodedString) {
                 let data = JSON.parse(decodedString)
                 if (data.app_id == "pi_fest_map_2024") {
-                    this.$router.push(`/award-stamps/${data.user_id}`)
+                    //alert(data.username)
+                    this.$router.push(`/award-stamps/${data.user_id}/${data.username}/${data.nb_stamps}`)
                 }
-                alert(decodedString)
                 console.log("decodedString", decodedString)
             }
         }

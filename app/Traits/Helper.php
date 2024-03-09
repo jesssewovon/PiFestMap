@@ -37,6 +37,7 @@ trait Helper
                 $q->with('business_type');
                 $q->with('loyalty_card');
             }])
+            ->with('user_stamp')
             ->whereNull('deleted_at')
             ->first();
         /*if (!is_null($user)) {
