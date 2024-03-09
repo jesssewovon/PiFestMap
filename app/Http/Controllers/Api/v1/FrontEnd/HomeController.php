@@ -321,7 +321,7 @@ class HomeController extends Controller
             ->first();
         if (is_null($user_stamps)) {
             $data['nb_stamps'] = $nb_stamps;
-            $user_stamps = AwardedStamp::create($data);
+            $user_stamps = UserStamp::create($data);
         }else{
             $total_stamps = intval($nb_stamps)+$user_stamps->nb_stamps;
             $user_stamps->update(['nb_stamps' => $total_stamps]);
