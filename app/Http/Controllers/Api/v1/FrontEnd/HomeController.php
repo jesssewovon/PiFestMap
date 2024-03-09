@@ -309,16 +309,18 @@ class HomeController extends Controller
 
     public function award_stamps(Request $request, $business_profiles_id, $pi_users_id)
     {
+        $nb_stamps = $request->nb_stamps;
         $data = [
             'business_profiles_id' => $business_profiles_id,
             'pi_users_id' => $pi_users_id,
-            'nb_stamps_awarded' => $request->nb_stamps,
+            'nb_stamps_awarded' => $nb_stamps,
         ];
         AwardedStamp::create($data);
         $user_stamps = UserStamp::where('business_profiles_id', $business_profiles_id)
             ->where('pi_users_id', $pi_users_id)
             ->first();
-        $total_stamps = intval($request->nb_stamps)+$user_stamps->nb_stamps;
+        $stamps_to_add = !is_null($user_stamps)?$user_stamps->nb_stamps:0;
+        $total_stamps = intval($nb_stamps)+$stamps_to_add;
         $user_stamps->update(['nb_stamps' => $total_stamps]);
 
         return response()->json([

@@ -132,7 +132,7 @@
           })
         },
         mounted() {
-            this.user_id = this.$router.params.user_id
+            this.user_id = this.$route.params.user_id
             ///////////////////////////////////////////////////////////
             let self = this
             $( document ).ready(function() {
