@@ -319,9 +319,13 @@ class HomeController extends Controller
         $user_stamps = UserStamp::where('business_profiles_id', $business_profiles_id)
             ->where('pi_users_id', $pi_users_id)
             ->first();
-        $stamps_to_add = !is_null($user_stamps)?$user_stamps->nb_stamps:0;
-        $total_stamps = intval($nb_stamps)+$stamps_to_add;
-        $user_stamps->update(['nb_stamps' => $total_stamps]);
+        if (is_null($user_stamps)) {
+            $data['nb_stamps'] = $nb_stamps;
+            $user_stamps = AwardedStamp::create($data);
+        }else{
+            $total_stamps = intval($nb_stamps)+$user_stamps->nb_stamps;
+            $user_stamps->update(['nb_stamps' => $total_stamps]);
+        }
 
         return response()->json([
             'status' => true,
