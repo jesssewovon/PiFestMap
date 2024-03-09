@@ -229,6 +229,10 @@
                         this.business_profile = res.data.business_profile
                         this.items = this.business_profile.items
                         this.shopping.business_profile = this.business_profile
+
+                        if (this.business_profile.loyalty_card_status===false) {
+                            this.menu_tab_active = true
+                        }
                     } else {
                         this.$show_modal.show_modal({id: 'error', title: "Error", message: "Une erreur s'est produite", btn_text: 'OK'})
                     }

@@ -12,6 +12,7 @@ import LoyaltyCard from "./views/LoyaltyCard.vue";
 import BusinessProfilePhotos from "./views/BusinessProfilePhotos.vue";
 import BusinessProfileQRCode from "./views/BusinessProfileQRCode.vue";
 import DisplayQRCode from "./views/DisplayQRCode.vue";
+import ScanQRCode from "./views/ScanQRCode.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ShoppingCart from "./views/ShoppingCart.vue";
 import Orders from "./views/Orders.vue";
@@ -56,6 +57,11 @@ const routes = [
         name: "display-qr-code",
         path: "/display-qr-code",
         component: DisplayQRCode
+    },
+    {
+        name: "scan-qr-code",
+        path: "/scan-qr-code",
+        component: ScanQRCode
     },
     {
         name: "dashboard",
