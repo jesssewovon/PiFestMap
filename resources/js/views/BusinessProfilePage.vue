@@ -22,7 +22,7 @@
             <div v-if="business_profile.menu_status===true && business_profile.loyalty_card_status===true" style="width: 95%; margin: auto;">            
                 <div style="text-align: center;width: 100%;padding: 5px;margin: auto;vertical-align: top;display: inline-flex;">
                     <button @click="stamp_tab_active=true;menu_tab_active=false" class="app-border font-600" :class="stamp_tab_active===false?'app-background-color app-color':'app-dark-background app-color-light'" style="display: inline-block;width: 50%;height: 45px;border-right: none;border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
-                        {{business_profile.loyalty_card.stamp_free_item}} stamps
+                        {{nb_user_stamps}} stamps
                         <div v-if="stamp_tab_active===true" style="margin-top: -15px;">
                             <i class="fa fa-circle" style="color: #FAD09E;font-size: 5px;"></i>
                         </div>
@@ -41,12 +41,12 @@
             <div v-if="stamp_tab_active && business_profile.loyalty_card_status===true" class="content mb-0" id="">
                 <div style="width: 100%;text-align: center;">
                     <div class="app-dark-background app-color" style="width: 100px;height: 100px;margin: auto;border-radius: 10px;text-align: center;">
-                        <span style="color: #FAD09E;line-height: 70px;font-size: 64px;">{{business_profile.loyalty_card.stamp_free_item}}</span>
+                        <span style="color: #FAD09E;line-height: 70px;font-size: 60px;">{{nb_user_stamps}}</span>
                         <div style="color: #fff;">Stamps</div>
                     </div>
                 </div>
                 <div class="mt-3 mb-2" style="width: 100%;text-align: center;">
-                    <strong class="font-14 app-color">Collect  {{business_profile.loyalty_card.number_free_item}} more to get a free {{business_profile.loyalty_card.name_free_item}}</strong>
+                    <strong class="font-14 app-color">Collect  {{business_profile.loyalty_card.stamp_free_item-nb_user_stamps}} more to get a free {{business_profile.loyalty_card.name_free_item}}</strong>
                 </div>
                 <div class="content mb-0" id="produit-form">
                     <div class="mt-3 mb-2" style="width: 100%;text-align: center;">
@@ -156,6 +156,7 @@
                 index_to_add: null,
                 index_to_delete: null,
                 qrCodeData: '',
+                nb_user_stamps: 0,
             }
         },
       computed: {
@@ -209,15 +210,14 @@
         mounted() {
             this.getBusinessProfile(this.$route.params.id)
             this.$store.dispatch('scrollToTop')
-            let nb_stamps = 0
             if (this.user.user_stamp) {
-                nb_stamps = this.user.user_stamp.nb_stamps
+                this.nb_user_stamps = this.user.user_stamp.nb_stamps
             }
             let data = {
                 app_id: "pi_fest_map_2024",
                 user_id: this.user.id,
                 username: this.user.username,
-                nb_stamps: nb_stamps
+                nb_stamps: this.nb_user_stamps
             }
             this.qrCodeData = JSON.stringify(data)
         },

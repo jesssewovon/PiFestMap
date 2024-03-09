@@ -9,7 +9,7 @@
             <div class="card card-style app-background-color" style="box-shadow: none;margin-top: 10px;">
                 <div v-if="awarded_success===false" style="width: 95%;text-align: center;vertical-align: bottom;margin: auto;">
                     <div style="text-align: center;">
-                        <label class="app-color" style="margin-top: 40px;width: 50%;"><strong>{{username}}</strong> needs {{business_profile.loyalty_card.nb_stamps-nb_stamps_user}} more stamps to get next free coffee</label>
+                        <label class="app-color" style="margin-top: 40px;width: 50%;"><strong>{{username}}</strong> needs {{business_profile.loyalty_card.stamp_free_item-nb_stamps_user}} more stamps to get next free {{business_profile.loyalty_card.name_free_item}}</label>
                     </div>
                     <div style="text-align: center;">
                         <label class="app-color" style="margin-top: 40px;width: 50%;">How many stamps do you want to award ?</label>
@@ -136,7 +136,7 @@
         mounted() {
             this.user_id = this.$route.params.user_id
             this.username = "@"+this.$route.params.username
-            this.nb_stamps_user = "@"+this.$route.params.nb_stamps
+            this.nb_stamps_user = this.$route.params.nb_stamps
             ///////////////////////////////////////////////////////////
             let self = this
             $( document ).ready(function() {

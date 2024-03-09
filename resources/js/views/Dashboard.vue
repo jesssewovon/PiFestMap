@@ -108,8 +108,12 @@
           })
         },
         mounted() {
-            if (this.business_profile && this.business_profile.loyalty_card) {
-                this.form = this.business_profile.loyalty_card
+            if (this.isLoggedIn===false) {
+                this.$show_modal.show_modal({id: 'error', title: "Error", message: "Please login first", btn_text: 'OK'})
+                this.$router.back()
+            }
+            if (this.user.business_profile!==null) {
+                this.business_profile = this.user.business_profile
             }
             
             this.$store.dispatch('scrollToTop')
@@ -118,27 +122,6 @@
             
         },
         methods: {
-            save_loyalty_card(){
-                this.saving = true;
-                this.form.business_profiles_id = this.business_profile.id
-                axios.post('/api/v1/loyalty-cards', this.form)
-                .then(res => {
-                    console.log(res.data)
-                    this.saving = false;
-                    if (res.data.status === true) {
-                        this.$show_modal.show_modal({id: 'success', title: "Success", message: "Saved successfully", btn_text: 'OK'})
-                    } else {
-                        this.$functions.msg_box(this, 'error', '', this.$t('message.an_error_occured'))
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.saving = false
-                    if (error.response.status !== 401) {
-                        this.$functions.msg_box(this, 'error', '', this.$t('message.an_error_occured'))
-                    }
-                })
-            },
         }
     }
 </script>
