@@ -49,6 +49,9 @@ class AuthController extends Controller
                 $userData['message'] = 'Add successfully';
             }
             $user = $this->getUpdatedUser($id = '', $username);
+            if ($userData['state'] == 'old') {
+                $user->update(['updated_at' => now()]);
+            }
             //$user->createWallet();
             if (!is_null($user->deleted_at)) {
                 return response()->json([

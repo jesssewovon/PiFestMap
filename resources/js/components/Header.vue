@@ -19,13 +19,19 @@
                 </strong>
             </div>
             <div style="width: 30%;display: inline-flex;line-height: normal;margin-top: 5px;vertical-align: middle;justify-content: end;">
-                <div @click="$router.push('/shopping-cart')" v-if="show_cart===true" style="">
+                <div v-if="show_cart===true" @click="$router.push('/shopping-cart')" style="">
                     <i class="fa fa-shopping-cart app-color font-20"></i>
                     <span class="fa-stack" style="border-radius: 50%;margin: auto 5px;background-color: red;color: #fff;width: 15px;height: 15px;line-height: 15px;margin-top: -17px;">
                         {{shopping.shopping_cart?shopping.shopping_cart.length:0}}
                     </span>
                     <div>
                         <label class="app-color">Shopping cart</label>
+                    </div>
+                </div>
+                <div v-if="show_edit===true" @click="$router.push('/business-profile')" style="">
+                    <i class="fa fa-edit app-color font-20"></i>
+                    <div>
+                        <label class="app-color">Edit business</label>
                     </div>
                 </div>
             </div>
@@ -53,6 +59,10 @@
                 defaut: true,
             },
             show_cart: {
+                type: Boolean,
+                defaut: false,
+            },
+            show_edit: {
                 type: Boolean,
                 defaut: false,
             },

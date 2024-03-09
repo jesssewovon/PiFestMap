@@ -1,7 +1,10 @@
 <template>
     <div>
-        <Header v-if="prevRoute" :withAppName="false" :route="prevRoute.path" ref="header"/>
-        <div v-show="!isLoading" class="page-content app-background-color" style="padding-top: 30px;">
+        <Header v-if="prevRoute" :withAppName="true" :route="prevRoute.path" ref="header" :colorWhite="true" :show_edit="true"/>
+        <div v-show="!isLoading" class="page-content app-background-color" style="">
+            <div style="padding-top: 30px;padding-bottom: 20px;background-color: #fff;">
+                <h3 style="text-align: center;" class="app-color">Scan QR code</h3>
+            </div>
             <qrcode-stream @decode="onDecode"></qrcode-stream>
         </div>
     </div>
@@ -98,6 +101,10 @@
         },
         methods: {
             onDecode (decodedString) {
+                let data = JSON.parse(decodedString)
+                if (data.app_id == "pi_fest_map_2024") {
+                    this.$router.push(`/award-stamps/${data.user_id}`)
+                }
                 alert(decodedString)
                 console.log("decodedString", decodedString)
             }

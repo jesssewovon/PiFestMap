@@ -13,6 +13,7 @@ import BusinessProfilePhotos from "./views/BusinessProfilePhotos.vue";
 import BusinessProfileQRCode from "./views/BusinessProfileQRCode.vue";
 import DisplayQRCode from "./views/DisplayQRCode.vue";
 import ScanQRCode from "./views/ScanQRCode.vue";
+import AwardStamps from "./views/AwardStamps.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ShoppingCart from "./views/ShoppingCart.vue";
 import Orders from "./views/Orders.vue";
@@ -62,6 +63,11 @@ const routes = [
         name: "scan-qr-code",
         path: "/scan-qr-code",
         component: ScanQRCode
+    },
+    {
+        name: "award-stamps",
+        path: "/award-stamps/:user_id",
+        component: AwardStamps
     },
     {
         name: "dashboard",

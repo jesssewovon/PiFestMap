@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header v-if="prevRoute" :withAppName="true" :route="prevRoute.path" ref="header"/>
+        <Header v-if="prevRoute" :withAppName="true" :show_edit="true" :route="prevRoute.path" ref="header"/>
         <div class="page-content app-background-color" style="">
             <div style="padding-top: 30px;padding-bottom: 20px;">
                 <h3 style="text-align: center;" class="app-color">
@@ -12,13 +12,13 @@
                 <div class="content mb-0" id="" style="text-align: center;">
                     <div style="text-align: center;display: inline-block;margin: 10px;">
                         <div @click="$router.push('/orders')" class="app-dark-background" style="width: 100px;height: 100px;margin: auto;border-radius: 10px;border-top-right-radius: 2px;text-align: center;">
-                            <i class="fa fa-list-alt" style="color: #fff;font-size: 26px;line-height: 90px;"></i>
+                            <i class="fa fa-list-alt font-35" style="color: #fff;font-size: 26px;line-height: 90px;"></i>
                         </div>
                         <label class="app-color font-300 font-16" style="margin: 10px auto">Orders</label>
                     </div>
                     <div style="text-align: center;display: inline-block;margin: 10px;">
-                        <div @click="$router.push('/scan-qr-code')" class="" style="background-color: #FAD09E;width: 100px;height: 100px;margin: auto;border-radius: 10px;border-top-right-radius: 2px;text-align: center;">
-                            <i class="fa fa-list-alt" style="color: #fff;font-size: 26px;line-height: 90px;"></i>
+                        <div @click="$router.push('/scan-qr-code')" class="" style="background-color: #FAD09E;width: 100px;height: 100px;margin: auto;border-radius: 10px;border-bottom-left-radius: 2px;text-align: center;">
+                            <i class="fa fa-qrcode app-color font-35" style="font-size: 26px;line-height: 90px;"></i>
                         </div>
                         <label class="app-color font-300 font-16" style="margin: 10px auto">Award stamps</label>
                     </div>

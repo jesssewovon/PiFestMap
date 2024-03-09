@@ -53,7 +53,7 @@
                         <strong class="font-20 app-color">Show us this code to collect stamps.</strong>
                     </div>
                     <div style="text-align: center;">
-                        <vue-qrcode value="Hello, World!" :options="{ width: 200 }"></vue-qrcode>
+                        <vue-qrcode :value="qrCodeData" :options="{ width: 200 }"></vue-qrcode>
                     </div>
                     
                 </div>
@@ -155,6 +155,7 @@
                 items: [],
                 index_to_add: null,
                 index_to_delete: null,
+                qrCodeData: '',
             }
         },
       computed: {
@@ -208,6 +209,11 @@
         mounted() {
             this.getBusinessProfile(this.$route.params.id)
             this.$store.dispatch('scrollToTop')
+            let data = {
+                app_id: "pi_fest_map_2024",
+                user_id: this.user.id
+            }
+            this.qrCodeData = JSON.stringify(data)
         },
         watch: {
         },

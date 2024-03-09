@@ -15,6 +15,9 @@ use App\Models\Setting;
 use App\Models\Language;
 use App\Models\Wallet;
 
+use App\Models\UserStamp;
+use App\Models\AwardedStamp;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -302,5 +305,25 @@ class HomeController extends Controller
                 'user' => $this->getUpdatedUser($request->user()->id),
             ]);
         }
+    }
+
+    public function award_stamps(Request $request, $business_profiles_id, $pi_users_id)
+    {
+        $data = [
+            'business_profiles_id' => $business_profiles_id,
+            'pi_users_id' => $pi_users_id,
+            'nb_stamps_awarded' => $request->nb_stamps,
+        ];
+        AwardedStamp::create($data);
+        $user_stamps = UserStamp::where('business_profiles_id', $business_profiles_id)
+            ->where('pi_users_id', $pi_users_id)
+            ->first();
+        $total_stamps = intval($request->nb_stamps)+$user_stamps->nb_stamps;
+        $user_stamps->update(['nb_stamps' => $total_stamps]);
+
+        return response()->json([
+            'status' => true,
+            'user' => $this->getUpdatedUser($request->user()->id),
+        ]);
     }
 }
