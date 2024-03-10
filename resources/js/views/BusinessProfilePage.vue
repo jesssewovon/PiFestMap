@@ -63,6 +63,7 @@
                               }"
                             ></vue-qrcode>
                             <img
+                              v-if="business_profile.business_profile_photos && business_profile.business_profile_photos[0]"
                               class="qrcode__image"
                               :src="business_profile.business_profile_photos[0].url"
                               :alt="business_profile.name"
@@ -307,7 +308,7 @@
                     return
                 }
                 this.shopping.shopping_cart.push(this.items[index])
-                this.$show_modal.show_modal({id: 'info', title: 'Info', message: "Added successfully", btn_text: "OK"})
+                //this.$show_modal.show_modal({id: 'info', title: 'Info', message: "Added successfully", btn_text: "OK"})
             },
             delete_from_cart(index){
                 let item = this.items[index]
@@ -317,7 +318,7 @@
                     if (val.id != item.id) {new_cart.push(val)}
                 })
                 this.shopping.shopping_cart = new_cart
-                this.$show_modal.show_modal({id: 'info', title: 'Info', message: "Deleted successfully", btn_text: "OK"})
+                //this.$show_modal.show_modal({id: 'info', title: 'Info', message: "Deleted successfully", btn_text: "OK"})
             },
             add_to_cart_server_call(index){
                 this.index_to_add = index
