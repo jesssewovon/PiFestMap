@@ -205,7 +205,7 @@
                 this.lat_lng = this.business_profile.latitude +' / '+ this.business_profile.longitude
             }
 
-            var tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 20, attribution: 'PiFest'});
+            var tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 20, attribution: 'PiFestMap &copy 2024'});
 
             var map = new L.map('map-container', {
                 layers: tileLayer

@@ -13,9 +13,10 @@
                 <l-map ref="map" v-model:zoom="zoom" :center="center" @move="log('move')" @click="getLocation" style="z-index: 1;" :options="{zoomControl: false}">
                   <l-control-zoom position="bottomleft" :options="{class: 'leaflet-control-zoom'}"></l-control-zoom>
                   <l-tile-layer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    :url="url"
                     layer-type="base"
                     name="OpenStreetMap"
+                    :attribution="attribution"
                   ></l-tile-layer>
 
                   <!-- <l-control-layers /> -->
@@ -75,44 +76,12 @@
         },
         data() {
             return {
-                categories: [],
-                products: [],
-                tests: [{
-                    nom: "dqeq",
-                    src: "http://localhost:8000/storage/uploads/images/2023-11-14/6553a27a1437f_RD-How-To-Hide-Apps-on-an-iPhone_FT.jpg",
-                    href: "http://localhost:8000/storage/uploads/images/2023-11-14/6553a27a1437f_RD-How-To-Hide-Apps-on-an-iPhone_FT.jpg"
-                }],
-                products_pagination: null,
-                countries: [],
-                shops: [],
-                current_page: 1,
-                last_page: 2,
-                country_code: '',
-                iso3: '',
-                country_code_product: 'all',//Selected country for showing products
-                country_code_product_flag: 'all',//Selected country flag code for showing products
-                country_code_iso3: '',
-                //user: null,
-                search: '',
-                keyword: '',
-                selected_category: null,
-                isLoading: true,
-                isLoadingMore: false,
-                noMoreData: false,
-                //isOpenLoading: true,
-                product_tab_active: true,
-                service_tab_active: false,
-                shop_tab_active: false,
-                show_connexion_btn: false,
-                show_index_slider: true,
-                show_categories: true,
-                data_link: null,
-
                 //zoom: 13,
-                zoom: 2,
+                zoom: 1,
                 //center: [51.505, -0.09],
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                attribution: "PiFestMap &copy 2024",
                 controlPosition: 'topright', // Position of the control
                 iconWidth: 25,
                 iconHeight: 35,

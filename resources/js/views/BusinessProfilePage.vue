@@ -52,10 +52,23 @@
                     <div class="mt-3 mb-2" style="width: 100%;text-align: center;">
                         <strong class="font-20 app-color">Show us this code to collect stamps.</strong>
                     </div>
-                    <div style="text-align: center;">
-                        <vue-qrcode :value="qrCodeData" :options="{ width: 200 }"></vue-qrcode>
+                    <div style="text-align: center;">                    
+                        <figure class="qrcode">
+                            <vue-qrcode
+                              :value="qrCodeData"
+                              tag="svg"
+                              :options="{
+                                errorCorrectionLevel: 'Q',
+                                width: 200,
+                              }"
+                            ></vue-qrcode>
+                            <img
+                              class="qrcode__image"
+                              :src="business_profile.business_profile_photos[0].url"
+                              :alt="business_profile.name"
+                            />
+                        </figure>
                     </div>
-                    
                 </div>
             </div>
             <div v-if="menu_tab_active && business_profile.menu_status===true" class="content mb-0" id="">
@@ -389,7 +402,24 @@
 </script>
 
 <style scoped>
-    .active-tab{
-        background-color: 
+    .qrcode {
+      display: inline-block;
+      font-size: 0;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .qrcode__image {
+      background-color: #fff;
+      border: 0.25rem solid #fff;
+      border-radius: 0.25rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
+      height: 15%;
+      left: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 15%;
     }
 </style>
