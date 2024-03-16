@@ -3,20 +3,15 @@
         <Header v-if="prevRoute" :withAppName="true" :route="prevRoute.path" ref="header"/>
         <div class="page-content app-background-color" style="">
             <div style="padding-top: 30px;padding-bottom: 20px;">
-                <h3 style="text-align: center;" class="app-color">Contact Information</h3>
+                <h3 style="text-align: center;" class="app-color">{{$t('message.add_business_profile.contact_information')}}</h3>
             </div>
             <div class="card card-style app-background-color" style="box-shadow: none;">
                 <div class="content mb-0" id="produit-form">
-                    <label for="libelle" class="app-color">Business name</label>
+                    <label for="libelle" class="app-color">{{$t('message.add_business_profile.business_name')}}</label>
                     <div class="input-style has-borders validate-field mb-4">
                         <input v-on:input="hide_error_field('libelle')" type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="business_profile.name" maxlength="40" style="">
-                        
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <div id="required-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
-                        <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                     </div>
-                    <label for="libelle" class="app-color">Business type</label>
+                    <label for="libelle" class="app-color">{{$t('message.add_business_profile.business_type')}}</label>
                     <div data-menu="select-business-type" style="background-color: #fff;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <img v-if="business_profile.business_type==null" id="category_selected_img" src="/images/unknown.png" style="width: 20px;height: 20px;">
                         <img v-else id="category_selected_img" :src="'/images/'+business_profile.business_type.img" style="width: 20px;">
@@ -26,48 +21,38 @@
                         <input type="hidden" id="category_selected_id">
                         <div id="required-categories_id" style="color: red;display: none;">{{ $t('message.required.categories_id') }}</div>
                     </div>
-                    <label for="libelle" class="app-color">Business Map Point</label>
+                    <label for="libelle" class="app-color">{{$t('message.add_business_profile.business_map_point')}}</label>
                     <div id="map-container" style="height: 300px;"></div>
                     <div class="input-style has-borders validate-field mb-4">
                         <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="lat_lng" maxlength="40" style="" disabled>
-                        
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <div id="required-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
-                        <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                     </div>
-                    <label for="libelle" class="app-color">Location</label>
+                    <label for="libelle" class="app-color">{{$t('message.add_business_profile.location')}}</label>
                     <div class="input-style has-borders validate-field mb-4">
                         <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="business_profile.location" maxlength="40" style="">
-                        
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <div id="required-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
-                        <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                     </div>
                     <div @click="go_to('/menu')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
-                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Menu</label>
+                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">{{$t('message.add_business_profile.menu')}}</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
                     <div @click="go_to('/loyalty-card')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
-                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Loyalty stamps</label>
+                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">{{$t('message.add_business_profile.loyalty_stamps')}}</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
                     <div @click="go_to('business-profile-photos')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
-                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Business photos</label>
+                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">{{$t('message.add_business_profile.business_photos')}}</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
                     <div @click="go_to('/business-profile-qr-code')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
-                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">Get QR code</label>
+                        <label for="form5" class="font-600 app-color" style="margin-left: 22px;">{{$t('message.add_business_profile.get_qr_code')}}</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
                     <button @click="save"
                     class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
-                        Confirm
+                        {{$t('message.add_business_profile.confirm')}}
                     </button>
                 </div>
             </div>
@@ -183,7 +168,8 @@
           })
         },
         mounted() {
-            if (this.user.business_profile!==null) {
+            console.log('index', this.user, this.business_profile)
+            if (this.user.business_profile!==undefined && this.user.business_profile!==null) {
                 this.business_profile = this.user.business_profile
             }
 
@@ -192,7 +178,7 @@
             const searchControl = new GeoSearchControl({
               provider: provider,
               style: 'bar', // optional: bar|button  - default button
-              searchLabel: 'Enter your address', // optional: string      - default 'Enter address'
+              searchLabel: this.$t('message.add_business_profile.enter_your_address'), // optional: string      - default 'Enter address'
             });
             /*const map = new L.Map('map-container');
             map.addControl(searchControl);*/

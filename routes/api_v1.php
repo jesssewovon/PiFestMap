@@ -34,6 +34,7 @@ Route::group(['middleware' => ['settings']], function() {
 		Route::get('/get-cart', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@getCart');
 		Route::post('/making-order', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@making_order');
 		Route::post('/award-stamps/{business_profiles_id}/{pi_users_id}', '\App\Http\Controllers\Api\v1\FrontEnd\HomeController@award_stamps');
+		Route::post('/switchLocale', '\App\Http\Controllers\Api\v1\FrontEnd\AuthController@switchLocale')->name('switchLocale');
 		///////////////////START PI PAYMENT BACKEND
 		Route::post('/approve', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@approve')->name('approve');
 		Route::post('/complete', '\App\Http\Controllers\Api\v1\FrontEnd\PaymentController@complete')->name('complete');

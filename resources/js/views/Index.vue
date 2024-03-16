@@ -185,10 +185,11 @@
                 self: this
             }
             if (this.isLoggedIn) {
+                this.$i18n.locale = this.user.locale
                 data.isLoggedIn = this.isLoggedIn
+                this.$store.dispatch('signInPiNetwork', data)
             }
-            console.log('token', this.$store.state.token)
-            this.$store.dispatch('signInPiNetwork', data)
+            //console.log('token', this.$store.state.token)
         },
         watch: {
             user(after, before) {

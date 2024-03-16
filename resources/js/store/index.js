@@ -423,11 +423,8 @@ export default createStore({
         clearPaymentVerifier({commit, state}){
             commit('CLEAR_PAYMENT_VERIFIER')
         },
-        async signInPiNetwork({commit, state}, data) {
-            let confirm_func = data.self.$confirm
+        async signInPiNetwork({commit, state, dispatch }, data) {
             let isLoggedIn = data.isLoggedIn
-            let i18n = data.self.$i18n
-            let self = this
             state.error = ""
             if (isLoggedIn == undefined || !isLoggedIn) {//If not logged in, we logged him in in piketplace
                 state.connecting = true
@@ -444,7 +441,7 @@ export default createStore({
                     paymentId:paymentId,
                     txid:txid,
                 }
-                self.dispatch('executePaymentCompletion', data)
+                dispatch('executePaymentCompletion', data)
                 //We're not allowed to cancel a payment after approve
                 //this.dispatch('cancelPayment', data)
             };
@@ -460,12 +457,9 @@ export default createStore({
                     console.log('in signInPiNetwork, not isLoggedIn')
                     let dd = {
                         authResponse: auth,
-                        confirm_func: confirm_func,
-                        self: data.self,
                         isLoggedIn: isLoggedIn,
-                        i18n: i18n
                     }
-                    self.dispatch('signInPiketplace', dd);//Piketplace login
+                    dispatch('signInPiketplace', dd);//Piketplace login
                 }else{
                     state.connecting = false
                     console.log('in signInPiNetwork, isLoggedIn')
@@ -555,7 +549,7 @@ export default createStore({
                 if (error.response.data.status == 'deactivated') {
                     msg = i18n.global.t('message.account_deactivated')
                 }
-                ata.self.$functions.msg_box(data.self, 'error', i18n.global.t('message.connection'), msg)
+                show_modal.show_modal({id: 'error', title: "Error", message: msg, btn_text: 'OK'})
             });
 
             //console.log('authResult', authResult)

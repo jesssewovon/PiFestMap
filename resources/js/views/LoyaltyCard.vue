@@ -4,7 +4,7 @@
         <div class="page-content app-background-color" style="">
             <!-- <h3 style="text-align: center;margin-bottom: 20px;" class="app-color">Loyalty Card</h3> -->
             <div style="padding-top: 30px;padding-bottom: 20px;">
-                <h3 style="text-align: center;" class="app-color">Loyalty Card</h3>
+                <h3 style="text-align: center;" class="app-color">{{$t('message.add_business_profile.loyalty_cards')}}</h3>
             </div>
             <div style="width: 100%;height: 2px;border: 2px solid #090C49;" class="app-color font-600"></div>
             <div class="card card-style app-background-color" style="box-shadow: none;">
@@ -58,7 +58,7 @@
                     </button>
                     <button @click="save_loyalty_card"
                     class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
-                        Confirm
+                        {{$t('message.add_business_profile.confirm')}}
                     </button>
                 </div>
             </div>

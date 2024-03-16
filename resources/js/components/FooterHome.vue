@@ -2,13 +2,23 @@
     <div v-show="!isOpenLoading && $route.name !='support' && $route.name !='message'" id="footer-bar" class="footer-bar-6 footer_menu_hide">
 
         <div style="width: 95%;margin: auto;">
-            <div style="display: inline-block;width: 30%;">
+            <div v-if="!isLoggedIn" style="display: inline-block;width: 100%;">
+                <button @click="$store.dispatch('signInPiNetwork', {
+                    confirm: $confirm,
+                    i18n: $i18n,
+                    self: this
+                })" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
+                    <i class="fa fa-sign-in" style="opacity: 1; color: #FAD09E;"></i>
+                    {{$t('message.log_in')}}
+                </button>
+            </div>
+            <div v-if="isLoggedIn" style="display: inline-block;width: 30%;">
                 <button @click="$router.push('/dashboard')" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
                     <i class="fa fa-dashboard" style="opacity: 1; color: #FAD09E;"></i>
                     {{$t('message.dashboard')}}
                 </button>
             </div>
-            <div style="width: 48%;display: inline-block;">
+            <div v-if="isLoggedIn" style="width: 48%;display: inline-block;">
                 <button @click="$router.push('/business-profile')" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
                     <span class="fa-stack">
                         <i class="fa fa-circle-thin fa-stack-2x" style="opacity: 1; color: #FAD09E;"></i>
@@ -17,7 +27,7 @@
                     {{$t('message.add_my_business')}}
                 </button>
             </div>
-            <div style="width: 18%;display: inline-block;">
+            <div v-if="isLoggedIn" style="width: 18%;display: inline-block;">
                 <button @click="getUserLocation" style="background-color: #090C49;width: 40px;margin: auto;border-radius: 50%;color: #fff;height: 40px;">
                     <!-- <i class="fa fa-map" style="color: #FAD09E;"></i> -->
                     <img src="/site_images/navigator.png">
@@ -38,7 +48,7 @@
         };
     },
     computed: {
-        ...mapState(['isLoading', 'isOpenLoading']),
+        ...mapState(['isLoggedIn', 'isLoading', 'isOpenLoading']),
         user:{
             get(){
                 return this.$store.state.user

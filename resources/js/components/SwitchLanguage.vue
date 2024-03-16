@@ -66,11 +66,6 @@
             .catch(error => {
               console.log(error)
             });
-            setTimeout(function() {
-                /*let id = $('#category_selected_id').val()
-                let libelle = $('a[data-category-id='+id+']').attr('data-category-libelle')
-                $('#category_selected_label').html(libelle)*/
-            }, 100)
         }
   }
 }

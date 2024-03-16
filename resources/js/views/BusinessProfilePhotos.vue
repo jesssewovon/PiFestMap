@@ -19,7 +19,7 @@
         <div v-show="!isLoading" class="page-content app-background-color" style="">
             <div style="padding-top: 30px;padding-bottom: 20px;">
                 <h3 style="text-align: center;" class="app-color">
-                    Business Photos
+                    {{$t('message.add_business_profile.business_photos')}}
                 </h3>
             </div>
             <div v-if="business_profile && business_profile.business_profile_photos && business_profile.business_profile_photos.length>0" style="width: 100%;" class="app-color font-600">

@@ -276,9 +276,13 @@ axios.interceptors.response.use(
                 },
                 html: true,
                   callback: confirm => {
-                      router.push('/')
+                      //router.push('/')
                       console.log('here erasing')
                       store.dispatch('erasing')
+                      store.state.connecting = true
+                      store.dispatch('signInPiNetwork', {
+                      })
+                      
                   }
               }
           )
