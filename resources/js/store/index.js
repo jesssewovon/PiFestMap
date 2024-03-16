@@ -427,7 +427,7 @@ export default createStore({
             let isLoggedIn = data.isLoggedIn
             state.error = ""
             if (isLoggedIn == undefined || !isLoggedIn) {//If not logged in, we logged him in in piketplace
-                state.connecting = true
+                //state.connecting = true
             }
             console.log('in signInPiNetwork')
             //const scopes = ["username", "payments", "wallet_address", "preferred_language", "roles"];

@@ -91,7 +91,7 @@
         },
         computed: {
             //...mapState(['test', 'user', 'isLoading', 'categories']),
-            ...mapState(['prevRoute', 'isPiBrowser', 'isLoggedIn', 'connecting', 'show_welcome']),
+            ...mapState(['prevRoute', 'isPiBrowser', 'isLoggedIn', 'show_welcome']),
             isOpenLoading:{
                 get(){
                     return this.$store.state.isOpenLoading
@@ -130,6 +130,30 @@
                 },
                 set(val){
                     this.$store.state.saving = val
+                }
+            },
+            connecting:{
+                get(){
+                    return this.$store.state.connecting
+                },
+                set(val){
+                    this.$store.state.connecting = val
+                }
+            },
+            disconnecting:{
+                get(){
+                    return this.$store.state.disconnecting
+                },
+                set(val){
+                    this.$store.state.disconnecting = val
+                }
+            },
+            deleting:{
+                get(){
+                    return this.$store.state.deleting
+                },
+                set(val){
+                    this.$store.state.deleting = val
                 }
             },
             locale:{
@@ -176,6 +200,7 @@
             this.deleting = false
             this.saving = false
             this.connecting = false
+            this.disconnecting = false
             //console.log('usserr', this.user)
             this.index_load_opening()
 

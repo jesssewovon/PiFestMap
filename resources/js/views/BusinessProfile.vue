@@ -30,6 +30,10 @@
                     <div class="input-style has-borders validate-field mb-4">
                         <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="business_profile.location" maxlength="40" style="">
                     </div>
+                    <button @click="save"
+                    class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
+                        {{$t('message.add_business_profile.save')}}
+                    </button>
                     <div @click="go_to('/menu')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >
                         <label for="form5" class="font-600 app-color" style="margin-left: 22px;">{{$t('message.add_business_profile.menu')}}</label>
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
@@ -50,10 +54,6 @@
                         <span><i class="fa fa-arrow-right app-color font-600" style="float: right;"></i></span>
                         <input type="hidden" id="category_selected_id">
                     </div>
-                    <button @click="save"
-                    class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
-                        {{$t('message.add_business_profile.confirm')}}
-                    </button>
                 </div>
             </div>
         </div>

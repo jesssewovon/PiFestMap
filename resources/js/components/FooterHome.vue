@@ -3,7 +3,7 @@
 
         <div style="width: 95%;margin: auto;">
             <div v-if="!isLoggedIn" style="display: inline-block;width: 100%;">
-                <button @click="$store.dispatch('signInPiNetwork', {
+                <button @click="connecting=true;$store.dispatch('signInPiNetwork', {
                     confirm: $confirm,
                     i18n: $i18n,
                     self: this
@@ -71,6 +71,14 @@
             },
             set(val){
                 this.$store.state.business_profile = val
+            }
+        },
+        connecting:{
+            get(){
+                return this.$store.state.connecting
+            },
+            set(val){
+                this.$store.state.connecting = val
             }
         }
     },

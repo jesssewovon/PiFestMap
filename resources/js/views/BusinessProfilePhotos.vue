@@ -29,7 +29,7 @@
                             <i class="fa fa-trash app-color font-16" style=""></i>
                         </span>
                     </span>
-                    <img :src="photo.url" style="width: 100%;height: 400px;object-fit: cover;border-radius: 2%;">
+                    <img :src="'/storage/uploads/business-profile-photos/'+photo.url" style="width: 100%;height: 400px;object-fit: cover;border-radius: 2%;">
                 </div>
             </div>
             <div v-else style="width: 100%;text-align: center;">

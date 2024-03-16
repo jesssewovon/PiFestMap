@@ -156,7 +156,8 @@ class HomeController extends Controller
         $business_profile_photos = $business_profile->business_profile_photos;
         $business_profile_photos[] = [
             'id' => uniqid(),
-            'url' => $access_path,
+            'url' => $filePath,
+            'url_http' => $access_path,
             'path' => $path.'/'.$name,
         ];
 

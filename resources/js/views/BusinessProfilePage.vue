@@ -15,7 +15,7 @@
                 </div>
                 <div v-if="business_profile" style="width: 100%;" class="app-color font-600">
                     <div style="position: relative;width: 95%;margin: 11px auto;">
-                        <img v-for="photo in business_profile.business_profile_photos" :src="photo.url" style="width: 32%;height: 150px;object-fit: cover;border-radius: 10%;padding: 5px;">
+                        <img v-for="photo in business_profile.business_profile_photos" :src="'/storage/uploads/business-profile-photos/'+photo.url" style="width: 32%;height: 150px;object-fit: cover;border-radius: 10%;padding: 5px;">
                     </div>
                 </div>
             </div>
