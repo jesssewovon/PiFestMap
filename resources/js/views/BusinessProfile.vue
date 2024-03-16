@@ -31,7 +31,7 @@
                         <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="business_profile.location" maxlength="40" style="">
                     </div>
                     <button @click="save"
-                    class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
+                    class="font-900 app-background-color" style="margin-top: 10px;margin-bottom: 40px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
                         {{$t('message.add_business_profile.save')}}
                     </button>
                     <div @click="go_to('/menu')" style="background-color: #FAD09E;padding: 15px;border-radius: 10px;margin-bottom: 20px;" >

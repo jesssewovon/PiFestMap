@@ -7,6 +7,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 
 use App\Traits\Helper;
+use Validator;
 
 class ItemController extends Controller
 {
@@ -44,10 +45,36 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'business_profiles_id' => 'required',
+            'image' => 'required',
+        ],[
+            'name.required' => 'name_required',
+            'price.required' => 'price_required',
+            'description.required' => 'description_required',
+            'business_profiles_id.required' => 'business_profiles_id_required',
+            'image.required' => 'image_required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),
+            ]);
+        }
         $data = $request->all();
         /////////////////////////////////////////////////////
         $directory = 'uploads/items';
         $file = $request->file("image");
+        if (is_null($file)) {
+            return response()->json([
+                'status' => false,
+                'user' => $this->getUpdatedUser($request->user()->id),
+                'message' => 'no_file',
+            ]);
+        }
         $date = date('Y-m-d');
         $path = storage_path($this->basePath.$directory.'/'.$date);
         if (!file_exists($path)) {
@@ -63,7 +90,7 @@ class ItemController extends Controller
         }
         $filesizeInBytes = $img->filesize();
         $filePath = $date.'/'.$name;
-        $data['images'][0] = asset("storage/uploads/items/".$filePath);
+        $data['images'][0] = $filePath;
         $img->save($path."/".$name,40);
         /////////////////////////////////////////////////////
         $item = Item::updateOrCreate(

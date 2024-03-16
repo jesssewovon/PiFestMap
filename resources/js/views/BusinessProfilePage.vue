@@ -164,8 +164,8 @@
             return {
                 prevRoute: null,
                 business_profile: null,
-                stamp_tab_active: true,
-                menu_tab_active: false,
+                stamp_tab_active: false,
+                menu_tab_active: true,
                 items: [],
                 index_to_add: null,
                 index_to_delete: null,

@@ -24,7 +24,7 @@
                         <i class="fa fa-circle-thin fa-stack-2x" style="opacity: 1; color: #FAD09E;"></i>
                         <i class="fa fa-plus fa-stack-1x" style="opacity: 1; color: #FAD09E;"></i>
                     </span>
-                    {{$t('message.add_my_business')}}
+                    {{$t('message.my_business')}}
                 </button>
             </div>
             <div v-if="isLoggedIn" style="width: 18%;display: inline-block;">

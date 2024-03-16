@@ -19,15 +19,18 @@
                 </button>
             </div>
         </div>
-        <div id="add-item" class="menu menu-box-modal app-background-color rounded-m" data-menu-height="335" data-menu-effect="menu-over" style="display: block; height: 95%;width: 90%;">
+        <div id="add-item" class="menu menu-box-modal app-background-color rounded-m" data-menu-height="335" data-menu-effect="menu-over" style="display: block; min-height: 75%;width: 90%;">
             <div class="menu-title">
                 <a href="#" class="close-menu" @click="$hide_modal.all" style="margin-top: 0;"><i class="fa fa-times app-color"></i></a>
             </div>
             <h3 class="mt-5" style="text-align: center;">Add new item</h3>
             <div class="content mb-0">
+                <div v-if="show_name_empty_message">
+                    <label style="color: red">Please enter a name</label>
+                </div>
                 <label for="libelle" class="app-color">Item name</label>
                 <div class="input-style has-borders validate-field mb-4">
-                    <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="item.name" maxlength="40" style="background-color: #fff!important;">
+                    <input type="text" class="form-control validate-name app-color app-border" id="libelle" placeholder="" v-model="item.name" maxlength="40" style="background-color: #fff!important;" @input="item.name!=''?show_name_empty_message=false:show_name_empty_message=true">
                     
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -35,6 +38,12 @@
                     <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                 </div>
                 <input v-show="false" id="file" type="file" v-on:change="onFileChange" name="" accept="image/jpeg, image/gif, image/png">
+                <div v-if="show_select_image_message">
+                    <label style="color: red">Please choose an image</label>
+                </div>
+                <div v-if="show_price_empty_message">
+                    <label style="color: red">Please enter a price</label>
+                </div>
                 <button v-show="file===null" @click="choose_file" class="font-900 app-background-color" style="width: 35%;display: inline-block;background-color: #FAD09E!important;color: #fff;border-radius: 10%;width: 100px;height: 100px;margin-right: 15px;">
                     <span class="fa-stack" style="width: 4em;height: 4em;line-height: 4em;">
                         <i class="fa fa-circle-thin fa-stack-2x" style="opacity: 1; color: #090C49;font-size: 4em;"></i>
@@ -54,7 +63,7 @@
                     <div style="width: 89%;display: inline-block;">
                         <label for="price" class="app-color">Price</label>
                         <div class="input-style has-borders validate-field mb-4">
-                            <input type="text" inputmode="decimal" class="form-control validate-name app-color app-border" id="price" placeholder="" v-model="item.price" maxlength="40" style="background-color: #fff!important;">
+                            <input type="text" inputmode="decimal" class="form-control validate-name app-color app-border" id="price" placeholder="" v-model="item.price" maxlength="40" style="background-color: #fff!important;" @input="item.price!=''?show_price_empty_message=false:show_price_empty_message=true">
                             
                             <i class="fa fa-times disabled invalid color-red-dark"></i>
                             <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -77,9 +86,12 @@
                         <div id="length-libelle" style="color: red;display: none;">{{ $t('message.required.libelle') }}</div>
                     </div>
                 </div>
+                <div v-if="show_description_empty_message">
+                    <label style="color: red">Please enter a description</label>
+                </div>
                 <label for="libelle" class="app-color" style="display: block;">Description</label>
                 <div class="input-style has-borders validate-field mb-4">
-                    <textarea type="text" class="form-control validate-name app-color app-border" id="description" placeholder="" v-model="item.description" maxlength="40" style="">
+                    <textarea type="text" class="form-control validate-name app-color app-border" id="description" placeholder="" v-model="item.description" maxlength="40" style="" @input="item.description!=''?show_description_empty_message=false:show_description_empty_message=true">
                     </textarea>
                     
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -89,7 +101,7 @@
                 </div>
                 <button @click="save_item"
                 class="font-900 app-background-color" style="margin-top: 20px;background-color: #090C49!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
-                    {{$t('message.add_business_profile.confirm')}}
+                    {{$t('message.add_business_profile.save')}}
                 </button>
             </div>
         </div>
@@ -105,7 +117,7 @@
                     <div v-if="!isLoading && items.length>0" style="padding-top: 30px;">
                         <div v-for="item in items" style="margin-bottom: 10px;">
                             <div style="width: 25%; display: inline-block;">
-                                <img :src="item.images[0]" style="width: 80px;height: 80px;border-radius: 10px;object-fit: cover;">
+                                <img :src="'/storage/uploads/items/'+item.images[0]" style="width: 80px;height: 80px;border-radius: 10px;object-fit: cover;">
                             </div>
                             <div style="width: 70%; display: inline-block;vertical-align: top;">
                                 <div style="width: 62%; display: inline-block;">
@@ -186,6 +198,10 @@
               file: null,
               items: [],
               item_to_delete: null,
+              show_select_image_message: false,
+              show_name_empty_message: false,
+              show_price_empty_message: false,
+              show_description_empty_message: false,
             }
         },
       computed: {
@@ -268,6 +284,7 @@
                 $('#file').trigger('click')
             },
             onFileChange(e) {
+                this.show_select_image_message = false
                 //console.log(e.target.files[0]);
                 //this.filename = "Selected File: " + e.target.files[0].name;
                 this.file = e.target.files[0];
@@ -296,6 +313,23 @@
                 })
             },
             save_item(){
+                if (this.item.name == null || this.item.name == '') {
+                    this.show_name_empty_message = true
+                    return
+                }
+                if (this.file == null) {
+                    this.show_select_image_message = true
+                    return
+                }
+
+                if (this.$functions.is_decimal_not_zero(this.item.price)===false) {
+                    this.show_price_empty_message = true
+                    return
+                }
+                if (this.item.description == null || this.item.description == '') {
+                    this.show_description_empty_message = true
+                    return
+                }
                 this.$hide_modal.hide_modal('add-item')
                 this.saving = true;
                 let formData = new FormData();
@@ -325,7 +359,9 @@
                         this.file = null
                         this.items = res.data.items
                         this.$show_modal.show_modal({id: 'success', title: "Success", message: "Added successfully", btn_text: 'OK'})
-                    } else {
+                    } else if(res.data.message=="no_file") {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.no_image_attached'), btn_text: 'OK'})
+                    }else {
                         this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.an_error_occured'), btn_text: 'OK'})
                     }
                 })
