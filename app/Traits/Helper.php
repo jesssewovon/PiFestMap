@@ -34,7 +34,7 @@ trait Helper
                   ->orWhere(DB::raw('BINARY `username`'), $username);
             })
             ->with(['business_profile' => function($q){
-                $q->with('business_type');
+                $q->whereNull('deleted_at')->with('business_type');
                 $q->with('loyalty_card');
             }])
             ->with('user_stamp')

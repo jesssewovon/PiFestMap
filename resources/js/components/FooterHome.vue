@@ -12,13 +12,13 @@
                     {{$t('message.log_in')}}
                 </button>
             </div>
-            <div v-if="isLoggedIn" style="display: inline-block;width: 30%;">
+            <div v-if="isLoggedIn" style="display: inline-block;width: 31%;">
                 <button @click="$router.push('/dashboard')" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
                     <i class="fa fa-dashboard" style="opacity: 1; color: #FAD09E;"></i>
                     {{$t('message.dashboard')}}
                 </button>
             </div>
-            <div v-if="isLoggedIn" style="width: 48%;display: inline-block;">
+            <div v-if="isLoggedIn" style="width: 51%;display: inline-block;">
                 <button @click="$router.push('/business-profile')" style="background-color: #090C49;width: 90%;margin: auto;border-radius: 9px;color: #fff;height: 40px;">
                     <span class="fa-stack">
                         <i class="fa fa-circle-thin fa-stack-2x" style="opacity: 1; color: #FAD09E;"></i>
@@ -27,8 +27,8 @@
                     {{$t('message.my_business')}}
                 </button>
             </div>
-            <div v-if="isLoggedIn" style="width: 18%;display: inline-block;">
-                <button @click="getUserLocation" style="background-color: #090C49;width: 40px;margin: auto;border-radius: 50%;color: #fff;height: 40px;">
+            <div v-if="isLoggedIn" style="width: 13%;display: inline-block;">
+                <button @click="getUserLocation" style="background-color: #090C49;width: 30px;margin: auto;border-radius: 50%;color: #fff;height: 30px;">
                     <!-- <i class="fa fa-map" style="color: #FAD09E;"></i> -->
                     <img src="/site_images/navigator.png">
                 </button>
