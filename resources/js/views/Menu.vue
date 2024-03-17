@@ -106,9 +106,9 @@
 
             <div class="card card-style app-background-color" style="box-shadow: none;">
                 <div class="mb-0" style="margin: 20px 0px;">
-                    <SwitchButton id="menu_off" label="Menu off" v-model:checked="business_profile.menu_status" />
-                    <SwitchButton v-if="business_profile.menu_status===true" id="orders_off" v-model:checked="business_profile.orders_status" label="Accept orders off" />
-                    <SwitchButton v-if="business_profile.menu_status===true" id="payments_off" v-model:checked="business_profile.payments_status" label="Accept payments off" />
+                    <SwitchButton id="menu_off" :label="$t('message.add_business_profile.menu')" v-model:checked="business_profile.menu_status" />
+                    <SwitchButton v-if="business_profile.menu_status===true" id="orders_off" v-model:checked="business_profile.orders_status" label="Accept orders" />
+                    <SwitchButton v-if="business_profile.menu_status===true" id="payments_off" v-model:checked="business_profile.payments_status" label="Accept payments" />
                     <div v-if="!isLoading && items.length>0" style="padding-top: 30px;">
                         <div v-for="item in items" style="margin-bottom: 10px;">
                             <div style="width: 25%; display: inline-block;">

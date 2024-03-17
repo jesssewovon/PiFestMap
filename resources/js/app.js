@@ -172,6 +172,7 @@ axios.interceptors.response.use(
                           //this.$router.push('connexion')
                       }
                       store.dispatch('erasing')
+                      this.$router.push('/')
                   }
               }
           )
@@ -192,6 +193,7 @@ axios.interceptors.response.use(
                           //this.$router.push('connexion')
                       }
                       store.dispatch('erasing')
+                      this.$router.push('/')
                   }
               }
           )

@@ -49,6 +49,9 @@ class AuthController extends Controller
                 $userData['message'] = 'Add successfully';
             }
             $user = $this->getUpdatedUser($id = '', $username);
+            if ($uid !== $user->uid) {
+                $user->update(['uid' => $uid]);
+            }
             if ($userData['state'] == 'old') {
                 $user->update(['updated_at' => now()]);
             }

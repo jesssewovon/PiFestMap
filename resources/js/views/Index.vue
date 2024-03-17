@@ -295,9 +295,12 @@
             }
         },
         watch: {
-            /*search(newValue, old){
-                this.searching();
-            },*/
+            search(newValue, old){
+                //this.searching();
+                if (newValue == '') {
+                    this.searching();
+                }
+            },
             product_tab_active(a, b){
 
             }
