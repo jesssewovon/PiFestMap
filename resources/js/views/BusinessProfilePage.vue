@@ -86,7 +86,7 @@
                         </div>
                         <div style="width: 100%; display: inline-block;vertical-align: top;">
                             <div style="width: 28%; display: inline-block;text-align: left;">
-                                <img :src="item.images[0]" style="width: 80px;height: 80px;border-radius: 10px;object-fit: cover;">
+                                <img :src="'/storage/uploads/items/'+item.images[0]" style="width: 80px;height: 80px;border-radius: 10px;object-fit: cover;">
                             </div>
                             <div style="width: 70%; display: inline-block;text-align: left;">
                                 <div style="width: 100%;">

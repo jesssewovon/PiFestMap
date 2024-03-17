@@ -28,7 +28,7 @@
                 </button>
             </div>
             <div v-if="isLoggedIn" style="width: 13%;display: inline-block;">
-                <button @click="getUserLocation" style="background-color: #090C49;width: 30px;margin: auto;border-radius: 50%;color: #fff;height: 30px;">
+                <button @click="getUserLocation" style="background-color: #090C49;width: 40px;margin: auto;border-radius: 50%;color: #fff;height: 40px;">
                     <!-- <i class="fa fa-map" style="color: #FAD09E;"></i> -->
                     <img src="/site_images/navigator.png">
                 </button>

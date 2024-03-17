@@ -5,14 +5,9 @@
             <div class="menu-title">
                 <a href="#" class="close-menu" @click="$hide_modal.all" style="margin-top: 0;"><i class="fa fa-times app-color"></i></a>
             </div>
-            <h3 class="mt-5" style="text-align: center;">Are you sure you want to delete the item ?</h3>
+            <h3 class="mt-5" style="text-align: center;">Are you sure ?</h3>
             <div class="content mb-0">
-                <h5 class="app-color">ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+                <h5 class="app-color">Are you sure you want to delete this item ? this action is irreversible.</h5>
                 <button @click="delete_item"
                 class="font-900" style="margin-top: 20px;background-color: #DF6161!important;color: #fff;border-radius: 10px;width: 100%;height: 50px;">
                     Delete item

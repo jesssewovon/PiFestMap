@@ -33,7 +33,7 @@
                             Make payment
                         </label>
                         <div v-for="item in shopping.shopping_cart" style="position: relative;width: 100%;margin: 11px auto;">
-                            <img :src="item.images[0]" style="width: 30px;height: 30px;object-fit: cover;border-radius: 10%;">&nbsp;
+                            <img :src="'/storage/uploads/items/'+item.images[0]" style="width: 30px;height: 30px;object-fit: cover;border-radius: 10%;">&nbsp;
                             <label class="app-color">{{item.qty}} x {{item.name}}</label>
                         </div>
                         <div style="width: 100%; display: inline-block;vertical-align: top;">

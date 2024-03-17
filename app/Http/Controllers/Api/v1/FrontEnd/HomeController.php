@@ -111,10 +111,25 @@ class HomeController extends Controller
         }
 
         //$business_profiles = $this->getBusinessProfiles();
-        $business_profiles = BusinessProfile::whereNull('deleted_at')
+        $req = BusinessProfile::whereNull('deleted_at')
             //->whereHas('loyalty_card')
             ->whereHas('user')
-            ->with('business_type')->get();
+            ->with('business_type');
+        if ($request->search) {
+            $search = $request->search;
+            $req = $req
+                ->where('name', 'like', '%'.$search.'%')
+                ->orWhere('location', 'like', '%'.$search.'%')
+                ->orWhereHas('business_type', function ($q) use($search){
+                    $q->where('code', 'like', '%'.$search.'%')
+                        ->orWhere('libelle', 'like', '%'.$search.'%')
+                        ->orWhere('description', 'like', '%'.$search.'%')
+                    ;
+                })
+            ;
+        }
+        $business_profiles = $req->get();        
+
         $data['business_profiles'] = $business_profiles;
 
         return response()->json($data);

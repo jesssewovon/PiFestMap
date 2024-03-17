@@ -6,7 +6,12 @@
         <div class="page-content" style="margin-top: 0px;">
             <div class="" style="margin-bottom: 10px;position: absolute;top: 30px;z-index: 11;width: 100%;">
                 <div class="" style="width: 90%;margin: auto;border: 2px solid #090C49;border-radius: 10px;padding: 5px;background-color: #fff;">
-                    <i class="fas fa-search" style="font-size: 20px;color: #090C49;margin: auto 10px;" @click="searching"></i><input type="text" v-model="search" :placeholder="$t('message.search_business')" style="display: inline;height: 40px;font-size: 14px !important;color: #090C49;border: none;width: 80%;margin: auto 10px;">
+                    <!-- <i class="fas fa-search" style="font-size: 20px;color: #090C49;padding: auto 10px;width: 10%;" @click="searching"></i> --><input type="text" v-model="search" :placeholder="$t('message.search_business')" style="display: inline-block;height: 40px;font-size: 14px !important;color: #090C49;border: none;width: 76%;margin: auto 5px;">
+                    <div style="display: inline-block;text-align: right;width: 20%">
+                        <button @click="searching" style="color: #fff;border-radius: 20%;padding: 0 10px!important;" class="app-dark-background">
+                            <i class="fas fa-search" style="color: #fff;padding: 10px 5px;"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div style="height:600px; width:100%;">
@@ -76,6 +81,7 @@
         },
         data() {
             return {
+                search: "",
                 //zoom: 13,
                 zoom: 1,
                 //center: [51.505, -0.09],
@@ -156,6 +162,14 @@
                     this.$store.state.deleting = val
                 }
             },
+            isSearching:{
+                get(){
+                    return this.$store.state.isSearching
+                },
+                set(val){
+                    this.$store.state.isSearching = val
+                }
+            },
             locale:{
                 get(){
                     return this.$store.state.locale
@@ -201,6 +215,7 @@
             this.saving = false
             this.connecting = false
             this.disconnecting = false
+            this.isSearching = false
             //console.log('usserr', this.user)
             this.index_load_opening()
 
@@ -239,13 +254,18 @@
                 this.isLoading = true
                 this.index_load_opening()
             },
+            searching(){
+                this.isSearching = true
+                this.index_load_opening()
+            },
             async index_load_opening(){
-                let res = await axios.get(`/api/v1/index-loading`)
+                let res = await axios.get(`/api/v1/index-loading?search=${this.search}`)
                 .then(res => {
                     console.log('index data-loading', res.data)
                     this.isLoading = false
                     this.isLoadingMore = false
                     this.isOpenLoading = false;
+                    this.isSearching = false;
                     this.business_profiles = res.data.business_profiles;
                     this.$currencyFunction.setCurrency(res.data.currency)
                     let dataSettings = {
@@ -266,6 +286,7 @@
                     this.isLoading = false
                     this.isLoadingMore = false
                     this.isOpenLoading = false;
+                    this.isSearching = false;
                 });
             },
             show_business_profile(bp){
@@ -274,12 +295,9 @@
             }
         },
         watch: {
-            search(newValue, old){
+            /*search(newValue, old){
                 this.searching();
-                /*if (newValue != '') {
-                    this.searching();
-                }*/
-            },
+            },*/
             product_tab_active(a, b){
 
             }

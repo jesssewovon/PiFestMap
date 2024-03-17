@@ -34,6 +34,7 @@ export default createStore({
         disconnecting: false,
         saving: false,
         deleting: false,
+        isSearching: false,
         isPiBrowser: false,
         user: null,
         email: '',

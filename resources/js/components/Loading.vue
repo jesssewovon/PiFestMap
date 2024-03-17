@@ -1,5 +1,5 @@
 <template>
-    <div v-if="deleting || saving || connecting || disconnecting" class="loader-background" style="z-index: 11;">
+    <div v-if="deleting || saving || connecting || disconnecting || isSearching" class="loader-background" style="z-index: 11;">
         <div style="text-align: center;width: 100%;margin-top: 150px;">
             <img src="/site_images/transparent-gif/loading3.gif" style="width: 75px;margin-top: 20px;border-radius: 10%;">
         </div>
@@ -14,7 +14,7 @@
             }
         },
         computed: {
-            ...mapState(['saving', 'connecting', 'disconnecting', 'deleting']),
+            ...mapState(['saving', 'connecting', 'disconnecting', 'deleting', 'isSearching']),
             user:{
                 get(){
                     return this.$store.state.user
