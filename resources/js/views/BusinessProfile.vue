@@ -168,10 +168,7 @@
           })
         },
         mounted() {
-            console.log('index', this.user, this.business_profile)
-            if (this.user.business_profile!==undefined && this.user.business_profile!==null) {
-                this.business_profile = this.user.business_profile
-            }
+            this.getConnectedUserBusinessProfile()
 
             const provider = new OpenStreetMapProvider();
 
@@ -378,6 +375,31 @@
                     return
                 }
                 this.$router.push(link)
+            },
+            getConnectedUserBusinessProfile(){
+                this.isLoading = true;
+                axios.get(`/api/v1/connected-user-business-profiles`)
+                .then(res => {
+                    console.log('getConnectedUserBusinessProfile', res.data)
+                    this.isLoading = false;
+                    if (res.data.status === true) {
+                        if (res.data.business_profile!==null) {
+                            this.business_profile = res.data.business_profile
+                        }else{
+                            this.business_profile = this.default_business_profile
+                            this.lat_lng = ''
+                        }
+                    } else {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: "Une erreur s'est produite", btn_text: 'OK'})
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.isLoading = false
+                    if (error.response.status !== 401) {
+                        this.$show_modal.show_modal({id: 'error', title: "Error", message: "Une erreur s'est produite", btn_text: 'OK'})
+                    }
+                })
             },
             save(){
                 if (this.business_profile && (this.business_profile.name==null || this.business_profile.name==undefined || this.business_profile.name=='')) {

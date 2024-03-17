@@ -116,6 +116,31 @@ export default createStore({
 
             }
         },
+        default_business_profile: {
+            name: "",
+            pi_users_id: null,
+            business_types_id: null,
+            business_type: null,
+            business_profile_photos: null,
+            location: "",
+            latitude: "",
+            longitude: "",
+            menu_status: true,
+            orders_status: false,
+            payments_status: true,
+            loyalty_card_status: false,
+            menu: [
+                {
+                    name: "",
+                    description: "",
+                    price: 0.0,
+                    image: "",
+                },
+            ],
+            loyalty_card: {
+
+            }
+        },
         shopping: {
             business_profile: null,
             shopping_cart: []

@@ -91,6 +91,23 @@ class BusinessProfileController extends Controller
         ]);
     }
 
+    public function connected_user_business_profiles(Request $request)
+    {
+        $user = $this->getUpdatedUser($request->user()->id);
+        $businessProfile = BusinessProfile::where('pi_users_id', $user->id)
+            ->whereNull('deleted_at')
+            ->with('business_type')
+            ->with('loyalty_card')
+            ->with('items')
+            ->first()
+        ;
+        return response()->json([
+            'status' => true,
+            'user' => $user,
+            'business_profile' => $businessProfile,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
