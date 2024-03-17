@@ -291,6 +291,10 @@
             },
             show_business_profile(bp){
                 //alert(bp.id)
+                if (this.isLoggedIn===false) {
+                  this.$show_modal.show_modal({id: 'error', title: "Error", message: this.$t('message.log_in_first'), btn_text: 'OK'})
+                  return
+                }
                 this.$router.push(`/business-profile-page/${bp.id}`);
             }
         },

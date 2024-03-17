@@ -138,14 +138,8 @@ class AuthController extends Controller
         $user->locale = 'en';
         $user->save();
         $user = $this->getUpdatedUser($id = '', $username);
-
-        $notification = new Notification();
-        $notification->message = "message.welcome";
-        $notification->url = "";
-        $notification->pi_users_id = $user->id;
-        $notification->save();
         $user->refresh();
-        $user->createWallet();
+        //$user->createWallet();
 
         return $user;
     }

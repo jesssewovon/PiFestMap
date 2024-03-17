@@ -67,13 +67,13 @@
                 </button>
             </div>
         </div>
-        <div v-else-if="!isLoggedIn" class="loader-background" style="">
+        <!-- <div v-else-if="!isLoggedIn" class="loader-background" style="">
             <div style="width: 100%;text-align: center;padding-top: 100px;">
                 <button @click="connecting=true;$store.dispatch('signInPiNetwork', {confirm: $confirm, self: this})" class="btn btn-xxs mb-3 rounded-s font-900 shadow-s  app-background-color app-color" style="min-width: 100px;margin: auto;">
                     {{$t('message.log_in_first')}}
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
