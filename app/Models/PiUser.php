@@ -27,6 +27,7 @@ class PiUser extends Authenticatable
         'card_expired_at',
         'filter_country_code',
         'username',
+        'uid',
         'email',
         'remember_token',
         'referred_by',
