@@ -49,7 +49,7 @@ class AuthController extends Controller
                 $userData['message'] = 'Add successfully';
             }
             $user = $this->getUpdatedUser($id = '', $username);
-            if ($uid !== $user->uid) {
+            if ($uid != $user->uid) {
                 $user->update(['uid' => $uid]);
             }
             if ($userData['state'] == 'old') {
@@ -79,7 +79,7 @@ class AuthController extends Controller
             array_push($permissions, 'role:user');
             $userData['data_cart'] = $this->total($user->cart);
             Auth::guard('pi_users')->login($user, $remember = true);
-            $userData['token'] =  $user->createToken('PiketplaceApp', $permissions)->plainTextToken;
+            $userData['token'] =  $user->createToken('PiFestMapApp', $permissions)->plainTextToken;
             //Log::info('tookkeenn : '.$userData['token']);
             ////////////////////////SET EXPIRES DATE////////////////////////
             $date_valid = $authResult['user']['credentials']['valid_until']['iso8601'];
@@ -88,7 +88,7 @@ class AuthController extends Controller
             $expires_at = new \Datetime($date.' '.$hour);
             DB::table('personal_access_tokens')
                 ->where('tokenable_id', $user->id)
-                ->where('name', 'PiketplaceApp')
+                ->where('name', 'PiFestMapApp')
                 ->latest()->take(1)->update(['expires_at' => $expires_at])
             ;
             /////////////////////////////////////////////////////////////////
